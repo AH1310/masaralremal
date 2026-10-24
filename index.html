@@ -1,88 +1,243 @@
-<!doctype html>
-<html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#10283c"><title>مسار الرمال | مساحة المشرف</title><style>
-:root{--navy:#10283c;--navy2:#17394f;--sand:#c7a675;--ink:#243b4b;--paper:#f3f5f4;--line:#e0e6e3;--muted:#7b8a8f;--green:#347963;--white:#fff}*{box-sizing:border-box}body{margin:0;font-family:Tahoma,Arial,sans-serif;color:var(--ink);background:var(--paper);line-height:1.8;font-size:14px}h1,h2,h3,p{margin-top:0}h1{font-size:27px}h2{font-size:21px}button,input,select,textarea{font:inherit}button,a,input,select,textarea{outline-color:var(--sand);outline-offset:3px}button{border:0;cursor:pointer}a{color:inherit;text-decoration:none}input,select,textarea{width:100%;padding:12px 14px;border:1px solid #d8dfdc;background:#fff;border-radius:7px;color:var(--ink);margin-top:7px}textarea{min-height:90px;resize:vertical}label{display:block;font-size:12px;margin-bottom:15px}small,.subtle{font-size:11px;color:var(--muted)}[hidden]{display:none!important}.tag{font-size:9px;color:#a98553;letter-spacing:1.2px}.login{min-height:100vh;display:grid;grid-template-columns:1.12fr 1fr;background:#fff}.login-side{background:var(--navy);color:#f6f3ed;padding:45px 9%;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}.login-side:after{content:'';position:absolute;width:520px;height:520px;left:-210px;bottom:-280px;border:1px solid #c7a67538;border-radius:50%;box-shadow:0 0 0 55px #c7a67509,0 0 0 120px #c7a67506;pointer-events:none}.admin-side{background:#202a31}.brand{display:flex;align-items:center;gap:12px;position:relative;z-index:1}.brand img{width:47px;height:47px;object-fit:contain;border:1px solid #c7a67575;padding:4px;border-radius:6px}.brand span{font-size:16px}.brand small{display:block;color:#a9bac2;font-size:9px}.login-copy{position:relative;z-index:1;margin:45px 0}.login-copy h1{font-weight:400;font-size:clamp(36px,5vw,62px);line-height:1.55;margin:17px 0}.login-copy em{font-style:normal;color:#d7b783}.login-copy p{max-width:400px;color:#c1ccd0;font-size:13px}.login-foot{position:relative;z-index:1;color:#a5b1b5}.login-card{padding:55px max(35px,13%);align-self:center}.login-card h2{margin:10px 0}.login-card>p{font-size:12px;color:var(--muted);margin-bottom:30px}.login-card .primary{width:100%;margin-top:10px}.primary{background:var(--navy);color:#fff;border-radius:7px;padding:12px 18px;font-size:12px}.primary:hover{background:#28516b}.primary span{color:#dfbd8d;margin-right:10px}.help-link{display:block;text-align:center;color:#71818a;margin-top:20px;font-size:11px}.sidebar{position:fixed;right:0;top:0;bottom:0;width:245px;background:var(--navy);color:#d0dbdd;padding:26px 19px;display:flex;flex-direction:column;z-index:3}.sidebar .brand{color:#fff}.nav-label{font-size:10px;color:#79909a;margin:43px 12px 13px}nav{display:grid;gap:5px}nav button{text-align:right;background:transparent;color:#bdcbd0;border-radius:6px;padding:12px 14px;font-size:12px}nav button:hover,nav button.selected{background:#ffffff12;color:#e3c590}nav button.selected{border-right:3px solid var(--sand)}.sidebar-bottom{margin-top:auto;border-top:1px solid #ffffff18;padding-top:16px;font-size:12px}.sidebar-bottom small{display:block;color:#91a5ad}.quiet{background:transparent;color:inherit;border:1px solid #8593994d;border-radius:6px;padding:7px 11px;font-size:10px;margin:9px 0}.admin-link{display:block;color:#d0b688;font-size:10px}.main-area{margin-right:245px;min-height:100vh;display:flex;flex-direction:column}.topbar{display:flex;justify-content:space-between;align-items:center;padding:18px 38px;background:#fff;border-bottom:1px solid var(--line)}.topbar h2{margin:3px 0 0;font-size:17px}.topbar>div:last-child{display:flex;align-items:center;gap:13px;font-size:10px;color:var(--muted)}main{padding:34px 38px;flex:1}.title-row{display:flex;justify-content:space-between;align-items:center;gap:18px;margin-bottom:23px}.title-row h1{font-size:25px;margin:0 0 4px}.title-row p{font-size:11px;color:var(--muted);margin:0}.title-row #page-actions{display:flex;gap:8px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}.stat{background:#fff;border:1px solid var(--line);border-radius:9px;padding:18px}.stat small{display:block}.stat strong{display:block;color:var(--navy);font-weight:400;font-size:25px;margin:6px 0}.stat span{font-size:9px;color:var(--muted)}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}.panel{background:#fff;border:1px solid var(--line);border-radius:9px;padding:21px;margin-bottom:17px}.panel-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:18px}.panel-head h3,.panel h3{font-size:15px;margin:0}.panel p{font-size:12px;color:var(--muted)}.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;text-align:right;white-space:nowrap;font-size:11px}th{background:#f5f7f6;font-size:10px;color:#74858c;font-weight:400}td,th{padding:12px 10px;border-bottom:1px solid #e9eeec}td button{margin-left:5px}.small-btn,.outline-btn,.danger-btn{padding:6px 9px;border-radius:5px;font-size:10px}.small-btn{background:#eaf0f2;color:#315168}.outline-btn{background:#fff;border:1px solid #d9e1de;color:#536872;padding:9px 14px;border-radius:6px;font-size:11px}.danger-btn{background:#faecea;color:#9a4e43}.pill{display:inline-block;border-radius:20px;padding:3px 9px;background:#e6f1eb;color:#31775e;font-size:9px}.pill.off{background:#f5e8e7;color:#9c5a4f}.pill.wait{background:#f8f0e2;color:#987331}.notice{padding:13px 15px;background:#f8f2e8;border-right:3px solid var(--sand);color:#7f6843;font-size:11px;margin:15px 0}.empty{padding:35px;text-align:center;color:var(--muted);font-size:12px}.progress{height:8px;background:#e8eeeb;border-radius:6px;overflow:hidden;margin:16px 0}.progress i{display:block;background:var(--sand);height:100%}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 15px}.full{grid-column:1/-1}.checklist{display:grid;grid-template-columns:1fr 1fr;gap:8px}.check{display:flex;align-items:center;gap:8px;margin:4px 0}.check input{width:16px;margin:0}.form-actions{display:flex;gap:10px;margin-top:15px}.filterbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:15px}.filterbar label{min-width:140px;margin:0}.filterbar button{align-self:end}.photos{display:flex;gap:6px}.photos img{width:52px;height:42px;object-fit:cover;border-radius:4px;border:1px solid #ddd}.photo-preview{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}.photo-preview img{width:70px;height:60px;object-fit:cover;border-radius:5px}.dialog-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}.dialog-head h2{margin:0}.icon-btn{background:#eef1ef;color:#52626a;border-radius:50%;width:32px;height:32px;font-size:20px}dialog{border:0;border-radius:12px;width:min(650px,94vw);padding:25px;color:var(--ink);max-height:90vh;overflow:auto}dialog::backdrop{background:#081a25aa;backdrop-filter:blur(3px)}#toast{position:fixed;z-index:20;bottom:20px;left:20px;max-width:90vw;background:var(--navy);color:#fff;padding:13px 19px;border-radius:7px;font-size:12px;box-shadow:0 7px 28px #0002}footer{border-top:1px solid var(--line);padding:13px 38px;color:var(--muted);font-size:10px}footer span{color:var(--sand);margin:0 5px}.chartbar{display:flex;gap:4px;align-items:end;height:110px;border-bottom:1px solid var(--line);padding:8px}.chartbar i{flex:1;background:#bd9e6d;min-height:2px;border-radius:3px 3px 0 0;position:relative}.chartbar i:hover{background:#24475b}.chart-labels{display:flex;justify-content:space-around;font-size:8px;color:var(--muted)}@media(max-width:1050px){.stats{grid-template-columns:1fr 1fr}.grid2{grid-template-columns:1fr}.sidebar{width:210px}.main-area{margin-right:210px}main{padding:25px}.topbar{padding:16px 25px}}@media(max-width:720px){.login{grid-template-columns:1fr}.login-side{padding:22px 7%}.login-copy{margin:25px 0}.login-copy h1{font-size:36px}.login-copy p{font-size:11px}.login-foot{display:none}.login-card{padding:30px 8%}.sidebar{position:relative;width:100%;height:auto;padding:14px}.sidebar .brand{justify-content:center}.nav-label{display:none}nav{display:flex;overflow:auto;margin-top:12px}nav button{white-space:nowrap;padding:8px 10px;font-size:10px}.nav button.selected{border-right:0;border-bottom:2px solid var(--sand)}.sidebar-bottom{display:flex;align-items:center;justify-content:space-between;gap:7px;padding-top:10px}.sidebar-bottom .quiet{margin:0}.main-area{margin:0}.topbar{padding:13px 15px}.topbar>div:last-child{gap:3px}.topbar time{display:none}main{padding:22px 14px}.title-row{align-items:flex-start;flex-direction:column}.stats{gap:8px}.stat{padding:13px}.stat strong{font-size:20px}.panel{padding:15px}.form-grid,.checklist{grid-template-columns:1fr}.full{grid-column:auto}footer{padding:12px 16px}}@media print{.sidebar,.topbar,.title-row button,.filterbar,.no-print{display:none!important}.main-area{margin:0}body{background:white}.panel{break-inside:avoid}}
 
-</style></head>
-<body><section id="login" class="login"><div class="login-side"><a href="index.html" class="brand"><img src="logo.png" alt="شعار مسار الرمال"><span>مسار الرمال<small>نظام متابعة المشروع</small></span></a><div class="login-copy"><span class="tag">PROJECT OPERATIONS</span><h1>عملك اليوم،<br><em>واضح في مساره.</em></h1><p>مساحة واحدة لمتابعة العمال والرواتب والمشتريات، ضمن الصلاحيات التي يمنحها لك مدير المشروع.</p></div><small class="login-foot">مسار الرمال · نظام داخلي للمشروع</small></div><form id="login-form" class="login-card"><span class="tag">أهلًا بعودتك</span><h2>تسجيل الدخول</h2><p>استخدم البريد وكلمة المرور التي أنشأها المدير.</p><label>البريد الإلكتروني<input type="email" name="email" required autocomplete="username" dir="ltr"></label><label>كلمة المرور<input type="password" name="password" required autocomplete="current-password" dir="ltr"></label><button class="primary">دخول إلى مساحة العمل <span>←</span></button><a class="help-link" href="admin.html">مدير النظام؟ دخول الإدارة</a></form></section>
-<div id="app" hidden><aside class="sidebar"><a class="brand" href="index.html"><img src="logo.png" alt="شعار مسار الرمال"><span>مسار الرمال<small>متابعة المشروع</small></span></a><div class="nav-label">مساحة العمل</div><nav id="nav"></nav><div class="sidebar-bottom"><div id="user-label"></div><button id="logout" class="quiet">تسجيل الخروج ↗</button><a class="admin-link" href="admin.html">إدارة المشروع ←</a></div></aside><div class="main-area"><header class="topbar"><div><span class="tag">MASAR / OPERATIONS</span><h2 id="project-title">مسار الرمال</h2></div><div><time id="date-now"></time><button id="refresh" class="quiet">تحديث ↻</button></div></header><main><div class="title-row"><div><h1 id="page-title"></h1><p id="page-desc"></p></div><div id="page-actions"></div></div><section id="view"></section></main><footer>مسار الرمال <span>·</span> مساحة مشرف المشروع</footer></div></div>
-<dialog id="dialog"><div class="dialog-head"><h2 id="dialog-title"></h2><button class="icon-btn" id="dialog-close" aria-label="إغلاق">×</button></div><form id="editor"></form></dialog><div id="toast" role="status" aria-live="polite" hidden></div><script type="module">
-import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
-const SUPABASE_URL='https://quypkhzohckwhwficlnh.supabase.co';
-const SUPABASE_PUBLISHABLE_KEY='sb_publishable_te7U47t-hC1ejR7hp1rM7Q_1t0XepKB';
-const PHOTO_BUCKET='purchase-photos';
-const supabase = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, { auth:{ persistSession:true, autoRefreshToken:true, detectSessionInUrl:true } });
-const PERMISSIONS = [
- ['workers.view','عرض العمال'],['workers.manage','إدارة العمال'],
- ['salaries.view','عرض الرواتب'],['salaries.manage','إدارة الرواتب والصرف'],
- ['purchases.view','عرض المشتريات'],['purchases.manage','إدارة المشتريات ورفع الصور'],
- ['reports','استخراج التقارير']
-];
-const money = v => new Intl.NumberFormat('ar-SA',{style:'currency',currency:'SAR',maximumFractionDigits:2}).format(Number(v)||0);
-const e = v => String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const monthDate = m => `${m}-01`;
-async function audit(action,details={}) {
- const {data:{user}}=await supabase.auth.getUser(); if(!user)return;
- await supabase.from('audit_log').insert({user_id:user.id,action,details});
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#102b46">
+<title>مسار الرمال | للتجارة والمقاولات العامة</title>
+<style>
+:root{
+ --navy:#102b46;--blue:#1769aa;--gold:#d5a54c;
+ --bg:#f3f6fa;--card:#fff;--text:#193047;
+ --muted:#66788b;--line:#dfe7ef;
 }
-async function profile(){const {data,error}=await supabase.from('profiles').select('*').single();if(error)throw error;if(!data.active){await supabase.auth.signOut();throw new Error('حسابك معطل. تواصل مع مدير النظام.');}return data;}
-function can(p,me){const x=me?.permissions||[];return me?.role==='admin'||x.includes(p)||(p==='workers.view'&&['workers.manage','salaries.view','salaries.manage'].some(k=>x.includes(k)))||(p==='salaries.view'&&['salaries.manage','workers.manage'].some(k=>x.includes(k)))||(p==='purchases.view'&&x.includes('purchases.manage'));}
-function toast(message){const el=document.querySelector('#toast');el.textContent=message;el.hidden=false;clearTimeout(window._toastTimer);window._toastTimer=setTimeout(()=>el.hidden=true,6000);}
-function csvDownload(name,rows){const csv='\ufeff'+rows.map(r=>r.map(v=>'"'+String(v??'').replaceAll('"','""')+'"').join(',')).join('\r\n');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));a.download=name;a.click();URL.revokeObjectURL(a.href);}
-async function imageUrl(path){const {data,error}=await supabase.storage.from(PHOTO_BUCKET).createSignedUrl(path,90);if(error)throw error;return data.signedUrl;}
-async function uploadPhotos(purchaseId,files,userId){
- if(files.length>5)throw new Error('اختر 5 صور بحد أقصى لكل عملية شراء.');
- const {data:existing,error}=await supabase.from('purchases').select('images').eq('id',purchaseId).single();if(error)throw error;
- const current=existing.images||[];if(current.length+files.length>5)throw new Error('الحد الأقصى الإجمالي 5 صور للمشتريات.');
- const paths=[];
- for(const file of files){if(file.size>5*1024*1024)throw new Error('الحد الأقصى للصورة 5 ميجابايت.');if(!['image/jpeg','image/png','image/webp'].includes(file.type))throw new Error('الصور المقبولة JPG وPNG وWEBP.');const path=`purchases/${purchaseId}/${crypto.randomUUID()}.${file.type==='image/png'?'png':file.type==='image/webp'?'webp':'jpg'}`;const {error:uploadError}=await supabase.storage.from(PHOTO_BUCKET).upload(path,file,{contentType:file.type,upsert:false});if(uploadError)throw uploadError;paths.push(path);}
- const {error:updateError}=await supabase.from('purchases').update({images:[...current,...paths],updated_at:new Date().toISOString()}).eq('id',purchaseId);if(updateError){await supabase.storage.from(PHOTO_BUCKET).remove(paths);throw updateError;}await audit('purchase_images_uploaded',{purchase_id:purchaseId,count:paths.length});
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);
+ font-family:Tahoma,Arial,sans-serif;line-height:1.8}
+button,input,textarea{font:inherit}
+button{cursor:pointer}
+header{position:sticky;top:0;z-index:20;background:var(--navy);
+ color:white;display:flex;align-items:center;gap:15px;
+ padding:12px 5%;box-shadow:0 4px 18px #0002}
+.logo{font-size:21px;font-weight:bold;flex:1}
+.logo small{display:block;font-size:11px;color:#e9c77d}
+.menu-btn{background:none;border:0;color:white;font-size:30px}
+.header-link{color:white;text-decoration:none;font-size:14px}
+nav{position:fixed;top:0;right:-310px;width:285px;
+ height:100vh;background:#102b46;z-index:30;
+ transition:.3s;padding:25px;box-shadow:0 0 30px #0003}
+nav.open{right:0}
+nav a{display:block;color:white;text-decoration:none;
+ padding:13px;border-bottom:1px solid #ffffff20}
+nav a:hover{background:#ffffff12}
+.close{float:left;background:none;border:0;color:white;font-size:26px}
+.overlay{display:none;position:fixed;inset:0;background:#0008;z-index:25}
+.overlay.show{display:block}
+.hero{background:linear-gradient(130deg,#102b46,#1769aa);
+ color:white;padding:75px 6%;text-align:center}
+.hero h1{font-size:clamp(27px,5vw,49px);margin:0 0 15px}
+.hero p{max-width:680px;margin:0 auto 25px;color:#e5eff9}
+.btn{border:0;border-radius:10px;padding:12px 22px;
+ background:var(--gold);color:#172a3a;font-weight:bold;
+ text-decoration:none;display:inline-block}
+.btn.secondary{background:white;color:var(--navy)}
+.container{max-width:1150px;margin:auto;padding:35px 18px}
+h2{text-align:center;color:var(--navy);margin-bottom:25px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{background:var(--card);border:1px solid var(--line);
+ border-radius:16px;padding:22px;box-shadow:0 5px 20px #18344a0b}
+.card h3{color:var(--blue);margin-top:5px}
+.card p{color:var(--muted)}
+.symbol{font-size:35px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);
+ gap:15px;text-align:center}
+.stat{background:white;padding:22px;border-radius:14px}
+.stat strong{display:block;color:var(--blue);font-size:25px}
+input,textarea{width:100%;padding:13px;margin:7px 0 14px;
+ border:1px solid var(--line);border-radius:9px;background:white}
+textarea{min-height:110px}
+label{font-weight:bold}
+.contact{max-width:700px;margin:auto}
+footer{background:var(--navy);color:white;text-align:center;
+ padding:25px;margin-top:30px}
+.notice{font-size:13px;color:var(--muted)}
+.status{margin:10px 0;font-size:14px}
+@media(max-width:700px){
+ .grid{grid-template-columns:1fr}
+ .stats{grid-template-columns:repeat(3,1fr)}
+ .stat{padding:12px;font-size:12px}
+ .logo{font-size:16px}
+ .hero{padding:55px 20px}
 }
-function escapeCsv(v){return String(v??'');}
+</style>
+</head>
+<body>
 
+<header>
+<button class="menu-btn" onclick="toggleMenu()" aria-label="القائمة">☰</button>
+<div class="logo">مسار الرمال
+<small>للتجارة والمقاولات العامة</small></div>
+<a class="header-link" href="admin.html">دخول الإدارة</a>
+</header>
 
-const $=s=>document.querySelector(s);let me=null,settings=null,workers=[],salaries=[],purchases=[],page='dashboard',busy=false;
-const titles={dashboard:['نظرة عامة','ملخص فريقك وسجلاتك ضمن الصلاحيات المتاحة.'],workers:['العمال','أدر سجلات عمالك ورواتبهم الأساسية.'],salaries:['الرواتب','سجّل استحقاق كل عامل وحالة الصرف شهريًا.'],purchases:['المشتريات','سجّل المصروفات وأرفق صور الفواتير أو البنود.'],reports:['التقارير','اختر الفترة واطبع تقريرك أو احفظه PDF.'],profile:['حسابي','عدّل بيانات حسابك. الصلاحيات يحددها مدير المشروع.']};
-const endMonth=m=>{if(!m)return '';const y=Number(m.slice(0,4)),mo=Number(m.slice(5,7));return m+'-'+String(new Date(y,mo,0).getDate()).padStart(2,'0');},esc=v=>e(v),rows=(head,body)=>body.length?`<div class="table-wrap"><table><thead><tr>${head.map(x=>`<th>${esc(x)}</th>`).join('')}</tr></thead><tbody>${body.join('')}</tbody></table></div>`:'<div class="empty">لا توجد سجلات للعرض.</div>',tr=a=>'<tr>'+a.map(x=>`<td>${x}</td>`).join('')+'</tr>',pill=(yes,text)=>`<span class="pill ${yes?'':'off'}">${text}</span>`;
-async function load(){me=await profile();const s=await supabase.from('project_settings').select('*').eq('id',1).single();if(s.error)throw s.error;settings=s.data;$('#project-title').textContent=settings.project_name;$('#date-now').textContent=new Date().toLocaleDateString('ar-SA',{calendar:'gregory',dateStyle:'medium'});$('#user-label').innerHTML=`${esc(me.full_name)}<small>مشرف مشروع</small>`;const jobs=[];
-if(can('workers.view',me))jobs.push(supabase.from('workers').select('*').order('created_at',{ascending:false}));else jobs.push(Promise.resolve({data:[]}));
-if(can('salaries.view',me))jobs.push(supabase.from('worker_compensation').select('worker_id,monthly_salary'));else jobs.push(Promise.resolve({data:[]}));
-if(can('salaries.view',me))jobs.push(supabase.from('salaries').select('*,workers(name,supervisor_id)').order('month',{ascending:false}));else jobs.push(Promise.resolve({data:[]}));
-if(can('purchases.view',me))jobs.push(supabase.from('purchases').select('*').order('purchased_on',{ascending:false}));else jobs.push(Promise.resolve({data:[]}));
-const result=await Promise.all(jobs);for(const r of result)if(r.error)throw r.error;const compensation=new Map((result[1].data||[]).map(x=>[x.worker_id,x.monthly_salary]));workers=(result[0].data||[]).map(w=>({...w,monthly_salary:compensation.get(w.id)}));salaries=result[2].data||[];purchases=result[3].data||[];$('#login').hidden=true;$('#app').hidden=false;render();}
-function nav(){const list=['dashboard',...(can('workers.view',me)?['workers']:[]),...(can('salaries.view',me)?['salaries']:[]),...(can('purchases.view',me)?['purchases']:[]),...(can('reports',me)?['reports']:[]),'profile'];if(!list.includes(page))page='dashboard';$('#nav').innerHTML=list.map(k=>`<button class="${page===k?'selected':''}" data-page="${k}">${titles[k][0]}</button>`).join('');}
-function stats(){const out=[];if(can('workers.view',me))out.push(['عمال نشطون',workers.filter(w=>w.active).length]);if(can('purchases.view',me))out.push(['المشتريات المسجلة',money(purchases.reduce((a,p)=>a+Number(p.amount),0))]);if(can('salaries.view',me)){out.push(['رواتب مصروفة',money(salaries.filter(s=>s.status==='paid').reduce((a,s)=>a+Number(s.amount),0))],['مستحقات غير مصروفة',money(salaries.filter(s=>s.status==='pending').reduce((a,s)=>a+Number(s.amount),0))]);}return `<div class="stats">${out.map(x=>`<div class="stat"><small>${x[0]}</small><strong>${x[1]}</strong><span>ضمن البيانات المتاحة لحسابك</span></div>`).join('')}</div>`;}
-function render(){nav();$('#page-title').textContent=titles[page][0];$('#page-desc').textContent=titles[page][1];$('#page-actions').innerHTML='';const v=$('#view');
-if(page==='dashboard'){const spent=purchases.reduce((a,p)=>a+Number(p.amount),0)+salaries.filter(s=>s.status==='paid').reduce((a,s)=>a+Number(s.amount),0);v.innerHTML=stats()+`<div class="grid2"><div class="panel"><div class="panel-head"><h3>متابعة المشروع</h3>${pill(true,'بيانات فريقك')}</div><p>${esc(settings.project_description)}</p><p>المشتريات المسجلة: ${money(purchases.reduce((a,p)=>a+Number(p.amount),0))}</p><p>الرواتب المصروفة: ${money(salaries.filter(s=>s.status==='paid').reduce((a,s)=>a+Number(s.amount),0))}</p>${can('reports',me)?'<button class="outline-btn" data-page="reports">إعداد تقرير الفترة ←</button>':''}</div><div class="panel"><h3>صلاحيات حسابك</h3><p>${esc((me.permissions||[]).map(p=>PERMISSIONS.find(x=>x[0]===p)?.[1]||p).join(' · ')||'لم يمنحك المدير صلاحيات تشغيلية بعد.')}</p><div class="notice">صلاحيات العرض والإضافة يحددها مدير المشروع، ولا يمكن تغييرها من حساب المشرف.</div><span class="subtle">مصروفاتك المسجلة: ${money(spent)}</span></div></div>`;
-}else if(page==='workers'){const manage=can('workers.manage',me)&&can('salaries.manage',me);$('#page-actions').innerHTML=manage?'<button class="primary" data-edit="worker">+ إضافة عامل</button>':'';v.innerHTML=`<div class="panel"><div class="panel-head"><h3>سجل العمال</h3><input id="filter" placeholder="بحث باسم العامل أو الوظيفة" style="max-width:250px"></div><div id="table">${workerTable(workers,manage)}</div></div>`;$('#filter').oninput=()=>$('#table').innerHTML=workerTable(workers.filter(w=>(w.name+' '+w.job).includes($('#filter').value)),manage);
-}else if(page==='salaries'){const manage=can('salaries.manage',me);$('#page-actions').innerHTML=manage?'<button class="primary" data-edit="salary">+ تسجيل راتب شهر</button>':'';v.innerHTML=`<div class="panel"><div class="panel-head"><h3>الرواتب الشهرية</h3><input id="filter" type="month" style="max-width:180px"></div><div id="table">${salaryTable(salaries)}</div></div>`;$('#filter').oninput=()=>$('#table').innerHTML=salaryTable(salaries.filter(s=>!$('#filter').value||s.month===($('#filter').value+'-01')));
-}else if(page==='purchases'){const manage=can('purchases.manage',me);$('#page-actions').innerHTML=manage?'<button class="primary" data-edit="purchase">+ إضافة مشتريات</button>':'';v.innerHTML=`<div class="panel"><div class="panel-head"><h3>سجل المشتريات</h3><input id="filter" placeholder="بحث باسم البند أو تصنيفه" style="max-width:260px"></div><div id="table">${purchaseTable(purchases,manage)}</div></div>`;$('#filter').oninput=()=>$('#table').innerHTML=purchaseTable(purchases.filter(p=>(p.title+' '+p.category).includes($('#filter').value)),manage);
-}else if(page==='reports'){v.innerHTML=`<div class="panel"><h3>إنشاء تقرير</h3><p>اختر فترة التقرير، ثم اطبعه أو احفظه PDF من نافذة الطباعة. البيانات تقتصر على سجلاتك.</p><form id="report" class="form-grid"><label>من شهر<input type="month" name="from"></label><label>إلى شهر<input type="month" name="to"></label><div class="full form-actions"><button class="primary">فتح التقرير</button><button type="button" class="outline-btn" id="csv">تنزيل CSV</button></div></form></div>`;$('#report').onsubmit=e=>{e.preventDefault();const f=new FormData(e.target);if(f.get('from')&&f.get('to')&&f.get('from')>f.get('to'))return toast('تأكد من ترتيب بداية ونهاية الفترة.');window._reportFilters={from:f.get('from'),to:f.get('to')};page='report-preview';render();};$('#csv').onclick=()=>downloadCsv();
-}else if(page==='report-preview'){renderReport();
-}else if(page==='profile'){v.innerHTML=`<div class="panel"><form id="profile-form" class="form-grid"><label>الاسم<input name="full_name" value="${esc(me.full_name)}" required minlength="2"></label><label class="full">الصلاحيات الحالية<input value="${esc((me.permissions||[]).map(p=>PERMISSIONS.find(x=>x[0]===p)?.[1]||p).join('، '))}" disabled></label><div class="full"><button class="primary">حفظ الاسم</button></div></form></div>`;$('#profile-form').onsubmit=async e=>{e.preventDefault();try{const val=e.target.full_name.value.trim();const {error}=await supabase.from('profiles').update({full_name:val}).eq('id',me.id);if(error)throw error;await audit('profile_updated');await load();toast('تم تحديث الاسم.');}catch(err){toast(err.message);}};}}
-function workerTable(list,manage){return rows(['العامل','المهنة','الراتب الأساسي','الحالة','الإجراء'],list.map(w=>tr([esc(w.name),esc(w.job),can('salaries.view',me)?money(w.monthly_salary):'—',pill(w.active,w.active?'نشط':'مؤرشف'),manage?`<button class="small-btn" data-edit="worker" data-id="${w.id}">تعديل</button><button class="small-btn" data-toggle="${w.id}">${w.active?'أرشفة':'تنشيط'}</button>`:'—'])));}
-function salaryTable(list){return rows(['العامل','الشهر','المبلغ','حالة الصرف','إجراء'],list.map(s=>tr([esc(s.workers?.name),esc(s.month?.slice(0,7)),money(s.amount),pill(s.status==='paid',s.status==='paid'?'مصروف':'مستحق'),can('salaries.manage',me)?`<button class="small-btn" data-edit="salary" data-id="${s.id}">تعديل</button>`:'—'])));}
-function purchaseTable(list,manage){return rows(['البند','التصنيف','التاريخ','المبلغ','الصور','الإجراء'],list.map(p=>tr([esc(p.title),esc(p.category),esc(p.purchased_on),money(p.amount),`<div class="photos" data-photos="${p.id}">${(p.images||[]).length} صورة</div>`,manage?`<button class="small-btn" data-edit="purchase" data-id="${p.id}">تعديل</button><button class="danger-btn" data-delete="${p.id}">حذف</button>`:'—'])));}
-async function photos(){for(const p of purchases){const wrap=document.querySelector(`[data-photos="${p.id}"]`);if(!wrap||!p.images?.length)continue;for(const path of p.images){try{const url=await imageUrl(path);const img=document.createElement('img');img.src=url;img.alt='صورة مشتريات';wrap.append(img);}catch{}}}}
-function renderReport(){const f=window._reportFilters||{},from=f.from?f.from+'-01':'',to=f.to?endMonth(f.to):'';const ss=salaries.filter(s=>(!from||s.month>=from)&&(!to||s.month<=to)),ps=purchases.filter(p=>(!f.from||p.purchased_on>=from)&&(!f.to||p.purchased_on<=to));$('#page-actions').innerHTML='<button class="primary" onclick="window.print()">طباعة / حفظ PDF</button><button class="outline-btn" data-page="reports">عودة</button>';$('#view').innerHTML=`<div class="panel" id="report-print"><div class="panel-head"><div><span class="tag">MASAR AL RIMAL / FIELD REPORT</span><h2>${esc(settings.project_name)}</h2><p>${esc(settings.project_description)}</p></div><div class="subtle">المشرف: ${esc(me.full_name)}<br>تاريخ الإصدار: ${new Date().toLocaleDateString('ar-SA',{calendar:'gregory'})}<br>الفترة: ${esc(f.from||'البداية')} — ${esc(f.to||'الآن')}</div></div><div class="stats"><div class="stat"><small>إجمالي مشتريات الفترة</small><strong>${money(ps.reduce((a,p)=>a+Number(p.amount),0))}</strong></div><div class="stat"><small>رواتب مصروفة</small><strong>${money(ss.filter(s=>s.status==='paid').reduce((a,s)=>a+Number(s.amount),0))}</strong></div><div class="stat"><small>مستحقات</small><strong>${money(ss.filter(s=>s.status==='pending').reduce((a,s)=>a+Number(s.amount),0))}</strong></div></div><h3>المشتريات</h3>${purchaseTable(ps,false)}<h3 style="margin-top:25px">الرواتب</h3>${salaryTable(ss)}<p class="subtle" style="margin-top:30px">تقرير إداري داخلي حسب البيانات المتاحة للحساب وقت الإصدار.</p></div>`;}
-function workerModal(id){const w=workers.find(x=>x.id===id)||{};$('#dialog-title').textContent=id?'تعديل العامل':'إضافة عامل';$('#editor').innerHTML=`<input type="hidden" name="id" value="${esc(id||'')}"><div class="form-grid"><label>اسم العامل<input name="name" required value="${esc(w.name)}"></label><label>المهنة<input name="job" required value="${esc(w.job)}"></label><label class="full">الراتب الأساسي (ريال)<input name="monthly_salary" type="number" min="0" step="0.01" required value="${esc(w.monthly_salary??0)}"></label><div class="full"><label class="check"><input type="checkbox" name="active" ${w.active===false?'':'checked'}> العامل نشط</label></div></div><div class="form-actions"><button class="primary">حفظ</button></div>`;}
-function salaryModal(id){const s=salaries.find(x=>x.id===id)||{};$('#dialog-title').textContent=id?'تعديل راتب':'تسجيل راتب شهر';$('#editor').innerHTML=`<input type="hidden" name="id" value="${esc(id||'')}"><label>العامل<select name="worker_id" required>${workers.filter(w=>w.active||w.id===s.worker_id).map(w=>`<option value="${w.id}" ${w.id===s.worker_id?'selected':''}>${esc(w.name)}</option>`).join('')}</select></label><label>الشهر<input type="month" name="month" required value="${esc(s.month?.slice(0,7)||new Date().toISOString().slice(0,7))}"></label><label>المبلغ المستحق<input type="number" min="0" step="0.01" name="amount" required value="${esc(s.amount??'')}"></label><label>حالة الصرف<select name="status"><option value="pending" ${s.status==='pending'?'selected':''}>مستحق</option><option value="paid" ${s.status==='paid'?'selected':''}>مصروف</option></select></label><div class="form-actions"><button class="primary">حفظ الراتب</button></div>`;}
-function purchaseModal(id){const p=purchases.find(x=>x.id===id)||{};$('#dialog-title').textContent=id?'تعديل المشتريات':'إضافة مشتريات';$('#editor').innerHTML=`<input type="hidden" name="id" value="${esc(id||'')}"><div class="form-grid"><label>البند<input name="title" required value="${esc(p.title)}"></label><label>التصنيف<input name="category" value="${esc(p.category||'مواد ومستلزمات')}" required></label><label>التكلفة (ريال)<input type="number" min="0" step="0.01" name="amount" required value="${esc(p.amount??'')}"></label><label>التاريخ<input type="date" name="purchased_on" required value="${esc(p.purchased_on||new Date().toLocaleDateString('en-CA'))}"></label><label class="full">ملاحظات<textarea name="note">${esc(p.note)}</textarea></label><label class="full">صور الفاتورة أو البند — JPG/PNG/WEBP، 5 ميجابايت للصورة، 5 صور كحد أقصى<input type="file" name="photos" accept="image/jpeg,image/png,image/webp" multiple><small>تظهر الصور بعد الحفظ، ولا تكون عامة.</small></label></div><div class="form-actions"><button class="primary">حفظ المشتريات</button></div>`;}
-async function submitEditor(ev){ev.preventDefault();if(busy)return;busy=true;const f=ev.currentTarget,fd=new FormData(f),id=fd.get('id');try{if(page==='workers'){const payload={name:fd.get('name').trim(),job:fd.get('job').trim(),monthly_salary:Number(fd.get('monthly_salary')),active:fd.has('active')};const workerPayload={name:payload.name,job:payload.job,active:payload.active};let q=id?await supabase.from('workers').update(workerPayload).eq('id',id).select().single():await supabase.from('workers').insert({...workerPayload,supervisor_id:me.id}).select().single();if(q.error)throw q.error;const workerId=id||q.data.id;const {error:payError}=await supabase.from('worker_compensation').upsert({worker_id:workerId,monthly_salary:payload.monthly_salary,updated_at:new Date().toISOString()});if(payError)throw payError;await audit(id?'worker_updated':'worker_created',{worker:workerId,name:payload.name});}
-else if(page==='salaries'){const payload={worker_id:fd.get('worker_id'),month:fd.get('month')+'-01',amount:Number(fd.get('amount')),status:fd.get('status'),updated_by:me.id};const q=id?supabase.from('salaries').update(payload).eq('id',id):supabase.from('salaries').upsert(payload,{onConflict:'worker_id,month'});const {error}=await q;if(error)throw error;await audit('salary_saved',{worker_id:payload.worker_id,month:payload.month,amount:payload.amount,status:payload.status});}
-else{const payload={title:fd.get('title').trim(),category:fd.get('category').trim(),amount:Number(fd.get('amount')),purchased_on:fd.get('purchased_on'),note:fd.get('note').trim(),created_by:me.id,updated_at:new Date().toISOString()};let result=id?await supabase.from('purchases').update(payload).eq('id',id).select().single():await supabase.from('purchases').insert(payload).select().single();if(result.error)throw result.error;const files=f.elements.photos.files;if(files.length)await uploadPhotos(result.data.id,files,me.id);await audit(id?'purchase_updated':'purchase_created',{purchase_id:result.data.id,title:payload.title,amount:payload.amount});}
-$('#dialog').close();await load();toast('تم حفظ البيانات.');}catch(err){toast(err.message||'تعذر حفظ البيانات.');}finally{busy=false;}}
-$('#login-form').onsubmit=async ev=>{ev.preventDefault();const d=new FormData(ev.currentTarget);try{const {error}=await supabase.auth.signInWithPassword({email:d.get('email').trim(),password:d.get('password')});if(error)throw error;await load();}catch(err){toast(err.message);}};
-$('#logout').onclick=async()=>{await supabase.auth.signOut();$('#app').hidden=true;$('#login').hidden=false;};$('#refresh').onclick=()=>load().catch(err=>toast(err.message));$('#dialog-close').onclick=()=>$('#dialog').close();
-document.addEventListener('click',async ev=>{const b=ev.target.closest('button');if(!b)return;try{if(b.dataset.page){page=b.dataset.page;render();if(page==='purchases')photos();}if(b.dataset.edit){if(!can(b.dataset.edit==='worker'?'workers.manage':b.dataset.edit==='salary'?'salaries.manage':'purchases.manage',me))throw new Error('الصلاحية غير متاحة.');if(b.dataset.edit==='worker')workerModal(b.dataset.id);if(b.dataset.edit==='salary')salaryModal(b.dataset.id);if(b.dataset.edit==='purchase')purchaseModal(b.dataset.id);$('#dialog').showModal();}if(b.dataset.toggle){const w=workers.find(x=>x.id===b.dataset.toggle);const {error}=await supabase.from('workers').update({active:!w.active}).eq('id',w.id);if(error)throw error;await audit('worker_status_changed',{worker_id:w.id,active:!w.active});await load();}if(b.dataset.delete&&confirm('تأكيد حذف هذا البند؟')){const p=purchases.find(x=>x.id===b.dataset.delete);if(p.images?.length){const {error:photoError}=await supabase.storage.from('purchase-photos').remove(p.images);if(photoError)throw photoError;}const {error}=await supabase.from('purchases').delete().eq('id',p.id);if(error)throw error;await audit('purchase_removed',{id:p.id,title:p.title});await load();}}catch(err){toast(err.message);}});
-$('#editor').onsubmit=submitEditor;
-supabase.auth.onAuthStateChange((_event,session)=>{if(!session){$('#app').hidden=true;$('#login').hidden=false;}});
-async function downloadCsv(){const rows=[['النوع','الوصف','التاريخ/الشهر','المبلغ','الحالة'],...purchases.map(p=>['مشتريات',p.title,p.purchased_on,p.amount,'مسجل']),...salaries.map(s=>['راتب',s.workers?.name,s.month,s.amount,s.status==='paid'?'مصروف':'مستحق'])];csvDownload('masar-report.csv',rows);}
-async function boot(){try{const {data:{session}}=await supabase.auth.getSession();if(!session)return;await load();}catch(err){toast(err.message);}}
-boot();
+<div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+<nav id="menu">
+<button class="close" onclick="toggleMenu()">×</button>
+<h2 style="color:white;text-align:right">القائمة الرئيسية</h2>
+<a href="#home" onclick="toggleMenu()">الرئيسية</a>
+<a href="#about" onclick="toggleMenu()">من نحن</a>
+<a href="#services" onclick="toggleMenu()">خدماتنا</a>
+<a href="#projects" onclick="toggleMenu()">المشروعات</a>
+<a href="#products" onclick="toggleMenu()">المنتجات والتوريدات</a>
+<a href="#contact" onclick="toggleMenu()">تواصل معنا</a>
+<a href="admin.html">لوحة الإدارة</a>
+</nav>
 
+<section class="hero" id="home">
+<h1>شركة مسار الرمال</h1>
+<p>للتجارة والمقاولات العامة — حلول متكاملة في التوريدات
+والتشغيل والصيانة والخدمات والمشروعات.</p>
+<a href="#services" class="btn">استكشف خدماتنا</a>
+<a href="#contact" class="btn secondary">تواصل معنا</a>
+</section>
 
+<section class="container" id="about">
+<h2>من نحن</h2>
+<div class="card">
+<p>نسعى في شركة مسار الرمال للتجارة والمقاولات العامة
+إلى تقديم حلول موثوقة في مجالات التجارة والمقاولات
+والتوريدات والتشغيل والصيانة، مع الاهتمام بالجودة
+والالتزام باحتياجات العملاء.</p>
+</div>
+</section>
 
+<section class="container" id="services">
+<h2>خدمات الشركة</h2>
+<div class="grid">
+<div class="card"><div class="symbol">🏗️</div>
+<h3>المقاولات العامة</h3>
+<p>تنفيذ ومتابعة أعمال المقاولات والمشروعات.</p></div>
+<div class="card"><div class="symbol">🧹</div>
+<h3>التشغيل والنظافة</h3>
+<p>خدمات التشغيل والنظافة وإدارة المرافق.</p></div>
+<div class="card"><div class="symbol">🔧</div>
+<h3>الصيانة</h3>
+<p>خدمات الصيانة ومتابعة احتياجات المنشآت.</p></div>
+<div class="card"><div class="symbol">📦</div>
+<h3>التوريدات</h3>
+<p>توريد المواد والمستلزمات وفق متطلبات العملاء.</p></div>
+<div class="card"><div class="symbol">💡</div>
+<h3>المواد الكهربائية</h3>
+<p>توريدات الإنارة والكهرباء والمستلزمات.</p></div>
+<div class="card"><div class="symbol">📋</div>
+<h3>إدارة المشروعات</h3>
+<p>تنظيم أعمال المشروعات والتوريد والمتابعة.</p></div>
+</div>
+</section>
 
+<section class="container" id="projects">
+<h2>مشروعاتنا</h2>
+<div class="grid" id="projectsGrid">
+<div class="card">سيتم عرض المشروعات المنشورة هنا.</div>
+</div>
+</section>
 
+<section class="container" id="products">
+<h2>المنتجات والتوريدات</h2>
+<div class="grid" id="productsGrid">
+<div class="card">سيتم عرض المنتجات المنشورة هنا.</div>
+</div>
+</section>
 
-</script></body></html>
+<section class="container" id="contact">
+<h2>تواصل معنا</h2>
+<div class="card contact">
+<form id="contactForm">
+<label>الاسم</label>
+<input id="name" required maxlength="150">
+<label>البريد الإلكتروني</label>
+<input id="email" type="email" required>
+<label>رسالتك</label>
+<textarea id="message" required maxlength="3000"></textarea>
+<button class="btn" type="submit">إرسال الرسالة</button>
+<div class="status" id="contactStatus"></div>
+</form>
+</div>
+</section>
+
+<footer>
+شركة مسار الرمال للتجارة والمقاولات العامة
+<br>
+<small>جميع الحقوق محفوظة © <span id="year"></span></small>
+</footer>
+
+<script type="module">
+import {createClient} from
+'https://esm.sh/@supabase/supabase-js@2';
+
+const URL='https://uvlavmaumzluljiretvx.supabase.co';
+const KEY='sb_publishable_IQwLWe-keDBBLy3gaYiBjQ_unEHsUmg';
+const db=createClient(URL,KEY);
+
+document.getElementById('year').textContent=new Date().getFullYear();
+
+window.toggleMenu=()=>{
+ document.getElementById('menu').classList.toggle('open');
+ document.getElementById('overlay').classList.toggle('show');
+};
+
+function makeCard(title,description){
+ const card=document.createElement('div');
+ card.className='card';
+ const h=document.createElement('h3');
+ h.textContent=title;
+ const p=document.createElement('p');
+ p.textContent=description||'';
+ card.append(h,p);
+ return card;
+}
+
+async function loadPublic(table,element){
+ const target=document.getElementById(element);
+ const {data,error}=await db.from(table)
+ .select('title,description')
+ .eq('published',true).order('created_at',{ascending:false})
+ .limit(30);
+ if(error){
+  target.textContent='تعذر تحميل البيانات حاليًا.';
+  return;
+ }
+ target.replaceChildren();
+ if(!data?.length){
+  target.textContent='لا توجد عناصر منشورة حاليًا.';
+  return;
+ }
+ data.forEach(item=>target.appendChild(
+  makeCard(item.title,item.description)
+ ));
+}
+
+loadPublic('company_projects','projectsGrid');
+loadPublic('company_products','productsGrid');
+
+document.getElementById('contactForm').onsubmit=async e=>{
+ e.preventDefault();
+ const status=document.getElementById('contactStatus');
+ const button=e.target.querySelector('button');
+ button.disabled=true;
+ status.textContent='جارٍ الإرسال...';
+ const {error}=await db.from('contact_messages').insert({
+  name:document.getElementById('name').value.trim(),
+  email:document.getElementById('email').value.trim(),
+  message:document.getElementById('message').value.trim()
+ });
+ status.textContent=error
+  ?'تعذر إرسال الرسالة. حاول لاحقًا.'
+  :'تم إرسال رسالتك بنجاح.';
+ if(!error)e.target.reset();
+ button.disabled=false;
+};
+</script>
+</body>
+</html>
