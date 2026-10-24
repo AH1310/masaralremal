@@ -1,313 +1,1982 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>مسار الرمال | المدير العام</title>
-<style>
-:root{--navy:#102b46;--blue:#1769aa;--gold:#d5a54c}
-*{box-sizing:border-box}
-body{margin:0;font-family:Tahoma,Arial,sans-serif;background:#f2f5f9;color:#20384f}
-button,input{font:inherit}
-button{cursor:pointer}
-header{display:flex;align-items:center;gap:13px;background:var(--navy);color:white;padding:13px 18px;position:sticky;top:0;z-index:5}
-header img{width:45px;height:45px;object-fit:contain}
-header strong{flex:1}
-.menu{background:none;border:0;color:white;font-size:28px}
-aside{position:fixed;right:-280px;top:0;width:270px;height:100vh;background:var(--navy);padding:18px;z-index:10;transition:.3s}
-aside.open{right:0}
-aside button{display:block;width:100%;padding:15px;text-align:right;background:none;border:0;color:white;border-bottom:1px solid #ffffff22}
-main{max-width:1050px;margin:auto;padding:20px}
-.card{background:white;border:1px solid #e0e7ee;border-radius:15px;padding:20px;margin:15px 0}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.metric{background:white;text-align:center;padding:20px;border-radius:13px}
-.metric b{display:block;color:var(--blue);font-size:29px}
-input{width:100%;padding:12px;margin:7px 0 14px;border:1px solid #cbd8e5;border-radius:9px}
-label{display:block;font-weight:bold;font-size:14px}
-.btn{background:var(--blue);border:0;color:white;border-radius:9px;padding:11px 17px;margin:3px}
-.btn.light{background:#e5edf5;color:#1b3d59}
-.btn.danger{background:#bd3d3d}
-.item{padding:16px;border-bottom:1px solid #e0e7ee}
-.item strong{display:block;margin-bottom:8px}
-.hidden{display:none!important}
-#login{max-width:440px;margin:8vh auto}
-#login img{width:105px;height:105px;object-fit:contain;display:block;margin:auto}
-#login h1{text-align:center}
-#notice{position:fixed;bottom:15px;left:15px;right:15px;max-width:500px;margin:auto;padding:14px;border-radius:10px;background:var(--navy);color:white;display:none}
-@media(max-width:700px){.grid{grid-template-columns:repeat(2,1fr)}main{padding:12px}}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#102d29">
+  <title>مسار الرمال | لوحة المدير</title>
+
+  <style>
+    :root {
+      --bg: #f3f5f2;
+      --surface: #fff;
+      --ink: #18332d;
+      --muted: #6b7974;
+      --line: #e0e7e1;
+      --green: #17634e;
+      --dark: #102d29;
+      --gold: #dbb875;
+      --danger: #b73535;
+      --radius: 19px;
+      --shadow: 0 14px 42px #163c2810;
+    }
+
+    * { box-sizing: border-box }
+    [hidden] { display: none !important }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--bg);
+      font: 15px/1.8 Tahoma, Arial, sans-serif;
+    }
+
+    button, input, select, textarea { font: inherit }
+    button, a, input, select, textarea { -webkit-tap-highlight-color: transparent }
+
+    button {
+      cursor: pointer;
+      border: 0;
+      border-radius: 11px;
+      padding: 10px 17px;
+      background: var(--green);
+      color: white;
+      transition: .18s;
+    }
+
+    button:hover { filter: brightness(.95) }
+    button:disabled { cursor: wait; opacity: .55 }
+
+    button.secondary {
+      background: #eef3ee;
+      color: var(--ink);
+      border: 1px solid var(--line);
+    }
+
+    button.danger {
+      background: #fff0f0;
+      color: var(--danger);
+      border: 1px solid #f3d0d0;
+    }
+
+    button.small { padding: 6px 11px; font-size: 13px }
+    button.icon { padding: 6px 12px; font-size: 23px }
+
+    :focus-visible {
+      outline: 3px solid var(--gold);
+      outline-offset: 3px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      border: 1px solid #ccd8d0;
+      border-radius: 11px;
+      background: white;
+      color: var(--ink);
+      padding: 11px 12px;
+      min-width: 0;
+    }
+
+    textarea { min-height: 115px; resize: vertical }
+    input[type="checkbox"] { width: auto }
+    input[type="email"], input[type="password"] { direction: ltr }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+      font-size: 13px;
+    }
+
+    h1, h2, h3, p { margin-top: 0 }
+    h1 { font-size: clamp(23px, 3vw, 33px); margin-bottom: 4px }
+    h2 { font-size: 21px }
+    h3 { font-size: 17px }
+    .muted { color: var(--muted) }
+    .hint { color: var(--muted); font-size: 12px; overflow-wrap: anywhere }
+    .field { margin-bottom: 16px }
+    .actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center }
+    .stack { display: grid; gap: 20px }
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand img {
+      width: 58px;
+      height: 58px;
+      object-fit: contain;
+      background: #fff;
+      border-radius: 14px;
+      padding: 5px;
+    }
+
+    .brand strong { display: block; font-size: 18px }
+    .brand small { display: block; opacity: .7 }
+
+    .login {
+      min-height: 100dvh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      background:
+        radial-gradient(circle at 15% 15%, #dbb87530, transparent 35%),
+        linear-gradient(140deg, #102d29, #225443);
+    }
+
+    .login .card { width: min(100%, 440px); padding: 34px }
+    .login .brand { margin-bottom: 28px }
+    .login .submit { width: 100%; margin-top: 8px }
+
+    .sidebar {
+      position: fixed;
+      inset: 0 0 0 auto;
+      width: 270px;
+      background: var(--dark);
+      color: #fff;
+      padding: 26px 18px;
+      z-index: 40;
+      overflow-y: auto;
+      transition: transform .22s;
+    }
+
+    .sidebar .brand { padding: 0 8px 28px }
+    .sidebar nav { display: grid; gap: 7px }
+
+    .sidebar nav button {
+      text-align: right;
+      width: 100%;
+      background: transparent;
+      color: #d9e6de;
+      padding: 13px 16px;
+    }
+
+    .sidebar nav button.active {
+      color: #fff;
+      background: #ffffff13;
+      box-shadow: inset -3px 0 var(--gold);
+    }
+
+    .sidebar footer {
+      margin-top: 30px;
+      padding: 16px 10px;
+      border-top: 1px solid #ffffff18;
+      font-size: 12px;
+      color: #bdcec4;
+    }
+
+    .workspace { margin-right: 270px; min-height: 100dvh }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: #ffffffed;
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+      padding: 14px 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .topbar .right, .topbar .left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    #menuButton { display: none }
+    main { padding: 30px; max-width: 1600px; margin: auto }
+    .page-heading { margin-bottom: 25px }
+    .page-heading p { margin-bottom: 0 }
+
+    .hero {
+      background: linear-gradient(115deg, #102d29, #28624d);
+      color: white;
+      border: 0;
+      margin-bottom: 24px;
+      padding: 30px;
+    }
+
+    .hero .muted { color: #d6e5da }
+    .hero .eyebrow { color: var(--gold); font-size: 12px; letter-spacing: 1px }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .stat { padding: 22px }
+    .stat span { color: var(--muted) }
+    .stat strong { display: block; font-size: 36px; line-height: 1.5 }
+    .stat small { color: var(--muted) }
+
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .toolbar input { max-width: 330px }
+    .table-wrap { overflow: auto; max-height: 65vh }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      white-space: nowrap;
+      font-size: 13px;
+    }
+
+    th {
+      text-align: right;
+      color: var(--muted);
+      background: #f4f7f3;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+
+    th, td {
+      padding: 13px 14px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+    }
+
+    td.data {
+      max-width: 300px;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+
+    tbody tr:hover { background: #fbfcf9 }
+    .empty { text-align: center; padding: 35px; color: var(--muted) }
+
+    .pager {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 3px 11px;
+      border-radius: 30px;
+      font-size: 12px;
+      background: #e8f5ed;
+      color: #22603c;
+    }
+
+    .badge.off { background: #fff0ed; color: #9a493d }
+
+    .notice {
+      background: #fff8e8;
+      color: #71551a;
+      border: 1px solid #eadbb8;
+      padding: 12px 16px;
+      border-radius: 12px;
+      margin-bottom: 18px;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+
+    .error {
+      color: #a72e2e;
+      background: #fff0f0;
+      border-color: #eccaca;
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: #061c1870;
+      z-index: 35;
+    }
+
+    dialog {
+      width: min(700px, calc(100% - 28px));
+      max-height: 88dvh;
+      overflow-y: auto;
+      border: 0;
+      border-radius: 20px;
+      padding: 26px;
+      color: var(--ink);
+      box-shadow: 0 30px 100px #0003;
+    }
+
+    dialog::backdrop { background: #071e197a; backdrop-filter: blur(3px) }
+    .dialog-head { display: flex; justify-content: space-between; gap: 15px }
+    .dialog-fields { margin-top: 16px }
+    .dialog-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    #toast {
+      position: fixed;
+      bottom: 24px;
+      left: 24px;
+      z-index: 100;
+      max-width: min(480px, calc(100vw - 48px));
+      border-radius: 13px;
+      background: #173e30;
+      color: white;
+      padding: 14px 20px;
+      box-shadow: 0 12px 35px #0002;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+
+    #toast.error { background: #982f2f }
+
+    @media (max-width: 1100px) {
+      .stats { grid-template-columns: repeat(2, 1fr) }
+    }
+
+    @media (max-width: 900px) {
+      .sidebar { transform: translateX(100%) }
+      .sidebar.open { transform: translateX(0) }
+      .workspace { margin-right: 0 }
+      #menuButton { display: inline-block }
+      .topbar { padding: 12px 16px }
+      main { padding: 20px 15px }
+      .grid2 { grid-template-columns: 1fr }
+      .card { padding: 20px }
+    }
+
+    @media (max-width: 480px) {
+      .stats { grid-template-columns: 1fr }
+      .topbar .email { display: none }
+      .hero { padding: 23px }
+      .toolbar input { max-width: none }
+      .login .card { padding: 25px }
+    }
+
+    @media print {
+      .sidebar, .topbar, .toolbar, .pager, .actions, #toast { display: none !important }
+      .workspace { margin: 0 }
+      main { padding: 0 }
+      .table-wrap { max-height: none; overflow: visible }
+      .card { box-shadow: none }
+    }
+  </style>
 </head>
+
 <body>
+  <!-- تسجيل الدخول -->
+  <section id="loginView" class="login">
+    <div class="card">
+      <div class="brand">
+        <img src="logo.png" alt="شعار مسار الرمال">
+        <div>
+          <strong>مسار الرمال</strong>
+          <small class="muted">النظام الداخلي للشركة</small>
+        </div>
+      </div>
 
-<div id="login">
-<img src="logo.png" alt="الشعار">
-<h1>إدارة مسار الرمال</h1>
-<div class="card">
-<h3>دخول المدير العام</h3>
-<form id="loginForm">
-<label>البريد الإلكتروني</label>
-<input id="email" type="email" required>
-<label>كلمة المرور</label>
-<input id="password" type="password" required>
-<button class="btn">دخول</button>
-</form>
-</div>
-</div>
+      <h2>دخول المدير</h2>
+      <p class="muted">سجّل دخولك لإدارة أعمال الشركة.</p>
 
-<div id="app" class="hidden">
-<header>
-<button class="menu" onclick="toggleMenu()">☰</button>
-<img src="logo.png" alt="الشعار">
-<strong>لوحة المدير العام</strong>
-<button class="btn light" onclick="logout()">خروج</button>
-</header>
+      <div id="loginError" class="notice error" role="alert" hidden></div>
 
-<aside id="side">
-<button onclick="toggleMenu()">✕ إغلاق</button>
-<button onclick="showPage('dashboard')">📊 الإحصائيات</button>
-<button onclick="showPage('supervisors')">👥 إدارة المشرفين</button>
-<button onclick="showPage('account')">⚙️ حساب المدير</button>
-<button onclick="location.href='index.html'">🏢 إدارة العمال والمشتريات</button>
-</aside>
+      <form id="loginForm">
+        <div class="field">
+          <label for="loginEmail">البريد الإلكتروني</label>
+          <input id="loginEmail" type="email" autocomplete="username" required>
+        </div>
 
-<main>
-<section id="dashboard" class="page">
-<h2>لوحة المدير</h2>
-<p id="welcome"></p>
-<div class="grid" id="stats"></div>
-<div class="card">
-<h3>إدارة أعمال الشركة</h3>
-<p>يمكنك إضافة وتعديل وحذف العمال والحضور والمشتريات والمهام والتقارير من صفحة التشغيل.</p>
-<button class="btn" onclick="location.href='index.html'">فتح نظام التشغيل</button>
-</div>
-</section>
+        <div class="field">
+          <label for="loginPassword">كلمة المرور</label>
+          <input id="loginPassword" type="password"
+                 autocomplete="current-password" required>
+        </div>
 
-<section id="supervisors" class="page hidden">
-<h2>حسابات المشرفين</h2>
-<div class="card">
-<p>يمكنك تغيير اسم المشرف وتفعيل حسابه أو تعطيله.</p>
-<p>لإضافة مشرف جديد حاليًا، أنشئ حسابه من Supabase Authentication، ثم فعّله من هنا.</p>
-<div id="supervisorList"></div>
-</div>
-</section>
+        <button id="loginSubmit" class="submit" type="submit">تسجيل الدخول</button>
+      </form>
+    </div>
+  </section>
 
-<section id="account" class="page hidden">
-<h2>حساب المدير</h2>
-<div class="card">
-<form id="nameForm">
-<label>الاسم الكامل</label>
-<input id="myName" required minlength="2">
-<label>البريد الإلكتروني</label>
-<input id="myEmail" readonly>
-<button class="btn">حفظ الاسم</button>
-</form>
-<hr>
-<form id="passwordForm">
-<label>كلمة المرور الجديدة</label>
-<input id="newPassword" type="password" minlength="12" required>
-<button class="btn">تغيير كلمة المرور</button>
-</form>
-</div>
-</section>
-</main>
-</div>
+  <!-- التطبيق -->
+  <div id="appView" hidden>
+    <div id="menuOverlay" class="overlay" hidden></div>
 
-<div id="notice"></div>
+    <aside id="sidebar" class="sidebar" aria-label="القائمة الرئيسية">
+      <div class="brand">
+        <img src="logo.png" alt="شعار مسار الرمال">
+        <div>
+          <strong>مسار الرمال</strong>
+          <small>لوحة إدارة الشركة</small>
+        </div>
+      </div>
 
-<script type="module">
-import {createClient} from 'https://esm.sh/@supabase/supabase-js@2';
+      <nav id="navigation">
+        <button type="button" data-page="dashboard" class="active">◈ الرئيسية</button>
+        <button type="button" data-page="workers">♟ العمال</button>
+        <button type="button" data-page="attendance">◷ الحضور والانصراف</button>
+        <button type="button" data-page="purchases">▣ المشتريات</button>
+        <button type="button" data-page="tasks">☑ المهام</button>
+        <button type="button" data-page="reports">▤ التقارير</button>
+        <button type="button" data-page="supervisors">♙ المشرفون</button>
+        <button type="button" data-page="settings">⚙ إعدادات الحساب</button>
+      </nav>
 
-const db=createClient(
- 'https://uvlavmaumzluljiretvx.supabase.co',
- 'sb_publishable_IQwLWe-keDBBLy3gaYiBjQ_unEHsUmg'
-);
-const $=id=>document.getElementById(id);
-let user=null,profile=null;
+      <footer>
+        <div>إدارة موحّدة لأعمال مسار الرمال</div>
+        <div id="sidebarName"></div>
+      </footer>
+    </aside>
 
-function notify(text){
- $('notice').textContent=text;
- $('notice').style.display='block';
- setTimeout(()=>$('notice').style.display='none',4500);
-}
+    <div class="workspace">
+      <header class="topbar">
+        <div class="right">
+          <button id="menuButton" type="button" class="secondary icon"
+                  aria-label="فتح القائمة" aria-expanded="false"
+                  aria-controls="sidebar">☰</button>
+          <strong id="topTitle">الرئيسية</strong>
+        </div>
 
-window.toggleMenu=()=>$('side').classList.toggle('open');
+        <div class="left">
+          <span id="accountEmail" class="muted email"></span>
+          <button id="refreshButton" type="button" class="secondary">تحديث</button>
+          <button id="logoutButton" type="button" class="danger">خروج</button>
+        </div>
+      </header>
 
-async function start(){
- const {data:{user:authUser}}=await db.auth.getUser();
- if(!authUser){showLogin();return}
- const {data,error}=await db.from('profiles')
- .select('full_name,role,active').eq('id',authUser.id).single();
+      <main>
+        <div id="globalNotice" class="notice" role="status" hidden></div>
 
- if(error||!data?.active||data.role!=='admin'){
-  await db.auth.signOut();
-  showLogin();
-  notify('هذه الصفحة مخصصة للمدير فقط');
-  return;
- }
- user=authUser;
- profile=data;
- $('login').classList.add('hidden');
- $('app').classList.remove('hidden');
- await showPage('dashboard');
-}
+        <section id="dashboardPage">
+          <div class="card hero">
+            <div class="eyebrow">MASAR AL RIMAL</div>
+            <h1 id="welcomeTitle">أهلًا بك</h1>
+            <p class="muted">تابع فريقك وسجلات العمل من مكان واحد.</p>
+            <div id="todayLabel"></div>
+          </div>
 
-function showLogin(){
- $('login').classList.remove('hidden');
- $('app').classList.add('hidden');
-}
+          <div id="statsGrid" class="stats"></div>
 
-$('loginForm').onsubmit=async e=>{
- e.preventDefault();
- const button=e.target.querySelector('button');
- button.disabled=true;
- const {error}=await db.auth.signInWithPassword({
-  email:$('email').value.trim(),
-  password:$('password').value
- });
- button.disabled=false;
- if(error){notify(error.message);return}
- await start();
-};
+          <div class="card" style="margin-top:24px">
+            <h3>الوصول السريع</h3>
+            <div class="actions" id="quickActions">
+              <button type="button" data-page="workers">إدارة العمال</button>
+              <button type="button" data-page="attendance" class="secondary">سجلات الحضور</button>
+              <button type="button" data-page="supervisors" class="secondary">إدارة المشرفين</button>
+            </div>
+            <p class="hint" style="margin:16px 0 0">
+              الإحصائيات تعرض عدد السجلات الموجودة في كل قسم.
+            </p>
+          </div>
+        </section>
 
-window.logout=async()=>{
- await db.auth.signOut();
- location.reload();
-};
+        <section id="recordsPage" hidden>
+          <div class="page-heading">
+            <h1 id="recordsTitle"></h1>
+            <p class="muted">عرض السجلات وإضافتها وتعديلها وحذفها.</p>
+          </div>
 
-window.showPage=async page=>{
- $('side').classList.remove('open');
- document.querySelectorAll('.page')
- .forEach(x=>x.classList.add('hidden'));
- $(page).classList.remove('hidden');
+          <div class="card">
+            <div class="toolbar">
+              <input id="recordSearch" type="search"
+                     placeholder="بحث داخل الصفحة الحالية…"
+                     aria-label="البحث داخل الصفحة الحالية">
 
- if(page==='dashboard')await dashboard();
- if(page==='supervisors')await loadSupervisors();
- if(page==='account'){
-  $('myName').value=profile.full_name;
-  $('myEmail').value=user.email;
- }
-};
+              <div class="actions">
+                <button id="addRecordButton" type="button">+ إضافة سجل</button>
+              </div>
+            </div>
 
-async function dashboard(){
- $('welcome').textContent='مرحبًا، '+profile.full_name;
- $('stats').replaceChildren();
+            <div id="recordsStatus" class="hint" role="status"></div>
+            <div id="recordsTable" class="table-wrap"></div>
 
- const tables=[
-  ['workers','العمال'],
-  ['attendance','سجلات الحضور'],
-  ['purchases','المشتريات'],
-  ['tasks','المهام'],
-  ['reports','التقارير'],
-  ['profiles','الحسابات']
- ];
- for(const [table,label] of tables){
-  const {count,error}=await db.from(table)
-   .select('id',{count:'exact',head:true});
-  const box=document.createElement('div');
-  box.className='metric';
-  const title=document.createElement('span');
-  title.textContent=label;
-  const value=document.createElement('b');
-  value.textContent=error?'—':count;
-  box.append(title,value);
-  $('stats').append(box);
- }
-}
+            <div class="pager">
+              <span id="pageInfo" class="muted"></span>
+              <div class="actions">
+                <button id="previousPage" type="button" class="secondary">السابق</button>
+                <button id="nextPage" type="button" class="secondary">التالي</button>
+              </div>
+            </div>
+          </div>
+        </section>
 
-async function loadSupervisors(){
- const list=$('supervisorList');
- list.textContent='جارٍ التحميل...';
- const {data,error}=await db.from('profiles')
-  .select('id,full_name,active')
-  .eq('role','supervisor').order('created_at',{ascending:false});
+        <section id="supervisorsPage" hidden>
+          <div class="page-heading">
+            <h1>إدارة المشرفين</h1>
+            <p class="muted">إنشاء الحسابات وتعديل الأسماء والتحكم في تفعيلها.</p>
+          </div>
 
- if(error){list.textContent=error.message;return}
- list.replaceChildren();
- if(!data.length){
-  list.textContent='لا توجد حسابات مشرفين بعد.';
-  return;
- }
+          <div class="grid2">
+            <div class="card">
+              <h2>إضافة مشرف</h2>
 
- for(const supervisor of data){
-  const item=document.createElement('div');
-  item.className='item';
+              <form id="createSupervisorForm">
+                <div class="field">
+                  <label for="supervisorName">اسم المشرف</label>
+                  <input id="supervisorName" maxlength="150" required>
+                </div>
 
-  const title=document.createElement('strong');
-  title.textContent='المشرف: '+supervisor.full_name;
+                <div class="field">
+                  <label for="supervisorEmail">البريد الإلكتروني</label>
+                  <input id="supervisorEmail" type="email" autocomplete="off" required>
+                </div>
 
-  const label=document.createElement('label');
-  label.textContent='اسم الحساب';
+                <div class="field">
+                  <label for="supervisorPassword">كلمة المرور الأولية</label>
+                  <input id="supervisorPassword" type="password"
+                         minlength="12" autocomplete="new-password" required>
+                  <div class="hint">12 حرفًا على الأقل، مع مراعاة سياسة كلمات المرور بالمشروع.</div>
+                </div>
 
-  const name=document.createElement('input');
-  name.value=supervisor.full_name;
+                <button type="submit">إنشاء حساب المشرف</button>
+                <p id="createSupervisorStatus" class="hint" role="status"></p>
+              </form>
+            </div>
 
-  const status=document.createElement('p');
-  status.textContent=supervisor.active?'الحالة: نشط':'الحالة: معطل';
+            <div class="card">
+              <h2>صلاحيات المشرفين</h2>
+              <p class="muted">
+                تعديل الاسم والتفعيل يتم عبر دالة
+                <bdi>manage_supervisor</bdi>.
+              </p>
+              <p class="muted">
+                تعطيل المشرف يغيّر حالة حسابه. منع وصوله للبيانات
+                يعتمد على سياسات الأمان التي تتحقق من هذه الحالة.
+              </p>
+              <p class="hint">
+                لا يوجد زر حذف نهائي لحساب المشرف لأن وظيفة حذف حسابات
+                المصادقة غير مرفقة بهذا المشروع.
+              </p>
+            </div>
+          </div>
 
-  const save=document.createElement('button');
-  save.className='btn';
-  save.textContent='حفظ الاسم';
-  save.onclick=async()=>{
-   const value=name.value.trim();
-   if(value.length<2){notify('الاسم قصير');return}
-   save.disabled=true;
-   const {error}=await db.rpc('manage_supervisor',{
-    target_id:supervisor.id,
-    new_name:value,
-    new_active:supervisor.active
-   });
-   save.disabled=false;
-   if(error){notify(error.message);return}
-   notify('تم تعديل الاسم');
-   await loadSupervisors();
-  };
+          <div class="card" style="margin-top:22px">
+            <h2>قائمة المشرفين</h2>
+            <div id="supervisorsStatus" class="hint" role="status"></div>
+            <div id="supervisorsTable" class="table-wrap"></div>
+          </div>
+        </section>
 
-  const toggle=document.createElement('button');
-  toggle.className=supervisor.active?'btn danger':'btn';
-  toggle.textContent=supervisor.active?'تعطيل الحساب':'تفعيل الحساب';
-  toggle.onclick=async()=>{
-   const action=supervisor.active?'تعطيل':'تفعيل';
-   if(!confirm('هل تريد '+action+' هذا الحساب؟'))return;
-   toggle.disabled=true;
-   const {error}=await db.rpc('manage_supervisor',{
-    target_id:supervisor.id,
-    new_name:name.value.trim(),
-    new_active:!supervisor.active
-   });
-   toggle.disabled=false;
-   if(error){notify(error.message);return}
-   notify('تم تحديث حالة الحساب');
-   await loadSupervisors();
-  };
+        <section id="settingsPage" hidden>
+          <div class="page-heading">
+            <h1>إعدادات حساب المدير</h1>
+            <p class="muted">تحديث بيانات حسابك ومعلومات الدخول.</p>
+          </div>
 
-  item.append(title,label,name,status,save,toggle);
-  list.append(item);
- }
-}
+          <div class="grid2">
+            <div class="card">
+              <h2>اسم المدير</h2>
+              <form id="nameForm">
+                <div class="field">
+                  <label for="adminName">الاسم</label>
+                  <input id="adminName" maxlength="150" required>
+                </div>
+                <button type="submit">حفظ الاسم</button>
+              </form>
+            </div>
 
-$('nameForm').onsubmit=async e=>{
- e.preventDefault();
- const name=$('myName').value.trim();
- if(name.length<2){notify('الاسم قصير');return}
- const {error}=await db.from('profiles')
- .update({full_name:name}).eq('id',user.id);
- if(error){notify(error.message);return}
- profile.full_name=name;
- notify('تم تحديث اسم المدير');
-};
+            <div class="card">
+              <h2>البريد الإلكتروني</h2>
+              <form id="emailForm">
+                <div class="field">
+                  <label for="adminEmail">البريد الجديد</label>
+                  <input id="adminEmail" type="email" required>
+                </div>
+                <button type="submit">تحديث البريد</button>
+                <p class="hint">قد تحتاج إلى تأكيد التغيير عبر البريد وفق إعدادات المشروع.</p>
+              </form>
+            </div>
 
-$('passwordForm').onsubmit=async e=>{
- e.preventDefault();
- const {error}=await db.auth.updateUser({
-  password:$('newPassword').value
- });
- if(error){notify(error.message);return}
- $('passwordForm').reset();
- notify('تم تغيير كلمة المرور');
-};
+            <div class="card">
+              <h2>كلمة المرور</h2>
+              <form id="passwordForm">
+                <div class="field">
+                  <label for="newPassword">كلمة المرور الجديدة</label>
+                  <input id="newPassword" type="password" minlength="12"
+                         autocomplete="new-password" required>
+                </div>
 
-start();
-</script>
+                <div class="field">
+                  <label for="confirmPassword">تأكيد كلمة المرور</label>
+                  <input id="confirmPassword" type="password" minlength="12"
+                         autocomplete="new-password" required>
+                </div>
+
+                <div class="field">
+                  <label for="passwordNonce">رمز إعادة التحقق، إن طلبه النظام</label>
+                  <input id="passwordNonce" inputmode="numeric" autocomplete="one-time-code">
+                </div>
+
+                <div class="actions">
+                  <button type="submit">تحديث كلمة المرور</button>
+                  <button id="reauthButton" type="button" class="secondary">طلب رمز تحقق</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <!-- محرر السجلات -->
+  <dialog id="editorDialog">
+    <div class="dialog-head">
+      <h2 id="editorTitle"></h2>
+      <button id="closeEditor" type="button" class="secondary"
+              aria-label="إغلاق">✕</button>
+    </div>
+
+    <p class="hint">
+      الحقول مبنية على أعمدة الجدول الفعلية.
+      الحقول الاختيارية الفارغة عند الإضافة تُترك لقيم قاعدة البيانات الافتراضية.
+    </p>
+
+    <form id="editorForm">
+      <div id="editorFields" class="dialog-fields"></div>
+      <div id="editorError" class="notice error" role="alert" hidden></div>
+
+      <div class="dialog-actions">
+        <button id="cancelEditor" type="button" class="secondary">إلغاء</button>
+        <button id="saveRecordButton" type="submit">حفظ السجل</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- محرر المشرف -->
+  <dialog id="supervisorDialog">
+    <div class="dialog-head">
+      <h2>تعديل المشرف</h2>
+      <button id="closeSupervisor" type="button" class="secondary"
+              aria-label="إغلاق">✕</button>
+    </div>
+
+    <form id="editSupervisorForm">
+      <div class="field">
+        <label for="editSupervisorName">اسم المشرف</label>
+        <input id="editSupervisorName" maxlength="150" required>
+      </div>
+
+      <div class="field">
+        <label for="editSupervisorActive">حالة الحساب</label>
+        <select id="editSupervisorActive">
+          <option value="true">مفعّل</option>
+          <option value="false">معطّل</option>
+        </select>
+      </div>
+
+      <div id="supervisorEditError" class="notice error" role="alert" hidden></div>
+
+      <div class="dialog-actions">
+        <button type="submit">حفظ التغييرات</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div id="toast" role="status" aria-live="polite" hidden></div>
+
+  <script type="module">
+    import { createClient } from
+      "https://esm.sh/@supabase/supabase-js@2.102.0";
+
+    const CONFIG = {
+      url: "https://uvlavmaumzluljiretvx.supabase.co",
+      publishableKey: "sb_publishable_IQwLWe-keDBBLy3gaYiBjQ_unEHsUmg",
+      pageSize: 25,
+
+      /*
+       * طابق هذه المفاتيح مع body الذي تقرؤه Edge Function المنشورة.
+       * مثال: إذا كانت تقرأ full_name بدل name غيّر name إلى full_name.
+       */
+      supervisorBodyFields: {
+        name: "name",
+        email: "email",
+        password: "password"
+      },
+
+      /*
+       * اتركهما null للاكتشاف التلقائي:
+       * الاسم: full_name ثم name
+       * التفعيل: is_active ثم active
+       */
+      profileNameColumn: null,
+      profileActiveColumn: null
+    };
+
+    const db = createClient(CONFIG.url, CONFIG.publishableKey, {
+      auth: {
+        persistSession: true,
+        autoRefreshToken: true,
+        detectSessionInUrl: false
+      }
+    });
+
+    const TABLES = {
+      workers: { title: "العمال", singular: "عامل" },
+      attendance: { title: "الحضور والانصراف", singular: "سجل حضور" },
+      purchases: { title: "المشتريات", singular: "عملية شراء" },
+      tasks: { title: "المهام", singular: "مهمة" },
+      reports: { title: "التقارير", singular: "تقرير" }
+    };
+
+    const TITLES = {
+      dashboard: "الرئيسية",
+      ...Object.fromEntries(
+        Object.entries(TABLES).map(([key, value]) => [key, value.title])
+      ),
+      supervisors: "المشرفون",
+      settings: "إعدادات الحساب"
+    };
+
+    const LABELS = {
+      id: "المعرّف",
+      name: "الاسم",
+      full_name: "الاسم الكامل",
+      email: "البريد الإلكتروني",
+      phone: "الهاتف",
+      mobile: "الجوال",
+      role: "الدور",
+      active: "مفعّل",
+      is_active: "مفعّل",
+      worker_id: "العامل",
+      supervisor_id: "المشرف",
+      assigned_to: "المكلّف",
+      created_by: "أُنشئ بواسطة",
+      user_id: "المستخدم",
+      national_id: "رقم الهوية",
+      iqama: "رقم الإقامة",
+      iqama_number: "رقم الإقامة",
+      nationality: "الجنسية",
+      job: "الوظيفة",
+      job_title: "المسمى الوظيفي",
+      position: "المسمى الوظيفي",
+      salary: "الراتب",
+      daily_wage: "الأجر اليومي",
+      daily_rate: "الأجر اليومي",
+      project: "المشروع",
+      project_name: "اسم المشروع",
+      site: "الموقع",
+      site_name: "اسم الموقع",
+      location: "الموقع",
+      date: "التاريخ",
+      work_date: "تاريخ العمل",
+      attendance_date: "تاريخ الحضور",
+      purchase_date: "تاريخ الشراء",
+      report_date: "تاريخ التقرير",
+      check_in: "وقت الحضور",
+      check_out: "وقت الانصراف",
+      status: "الحالة",
+      hours: "عدد الساعات",
+      overtime: "الوقت الإضافي",
+      title: "العنوان",
+      description: "الوصف",
+      content: "المحتوى",
+      notes: "الملاحظات",
+      item: "الصنف",
+      item_name: "اسم الصنف",
+      quantity: "الكمية",
+      unit: "الوحدة",
+      price: "السعر",
+      unit_price: "سعر الوحدة",
+      amount: "المبلغ",
+      total: "الإجمالي",
+      total_amount: "المبلغ الإجمالي",
+      supplier: "المورّد",
+      supplier_name: "اسم المورّد",
+      invoice_number: "رقم الفاتورة",
+      priority: "الأولوية",
+      due_date: "تاريخ الاستحقاق",
+      completed_at: "وقت الإنجاز",
+      created_at: "تاريخ الإنشاء",
+      updated_at: "آخر تحديث"
+    };
+
+    const state = {
+      user: null,
+      profile: null,
+      nameColumn: null,
+      activeColumn: null,
+      schemas: {},
+      schemaError: "",
+      page: "dashboard",
+      offset: 0,
+      count: 0,
+      rows: [],
+      recordLoadId: 0,
+      supervisors: [],
+      editing: null,
+      supervisorEditing: null,
+      toastTimer: null
+    };
+
+    const $ = id => document.getElementById(id);
+
+    function el(tag, text, className) {
+      const node = document.createElement(tag);
+      if (text !== undefined && text !== null) node.textContent = String(text);
+      if (className) node.className = className;
+      return node;
+    }
+
+    function showMessage(id, message, error = false) {
+      const node = $(id);
+      node.textContent = message || "";
+      node.hidden = !message;
+      node.classList.toggle("error", error);
+    }
+
+    function toast(message, error = false) {
+      clearTimeout(state.toastTimer);
+      showMessage("toast", message, error);
+      state.toastTimer = setTimeout(() => {
+        $("toast").hidden = true;
+      }, error ? 10000 : 5500);
+    }
+
+    function errorText(error) {
+      const message = error?.message || String(error);
+      if (/Invalid login credentials/i.test(message))
+        return "البريد الإلكتروني أو كلمة المرور غير صحيحة.";
+      if (/row-level security|permission denied/i.test(message))
+        return "سياسات الأمان لا تسمح بهذه العملية. راجع صلاحيات المدير في security.sql.";
+      if (/violates foreign key/i.test(message))
+        return "السجل مرتبط ببيانات أخرى أو أن المعرّف المرتبط غير صحيح.";
+      if (/duplicate key/i.test(message))
+        return "توجد بيانات مكررة تخالف شرطًا فريدًا في قاعدة البيانات.";
+      if (/Failed to fetch|NetworkError/i.test(message))
+        return "تعذر الاتصال بالخادم. تحقق من اتصال الإنترنت.";
+      return message;
+    }
+
+    async function busy(formOrButton, action) {
+      const controls = formOrButton.matches("button")
+        ? [formOrButton]
+        : [...formOrButton.querySelectorAll("button")];
+
+      const old = controls.map(node => node.disabled);
+      controls.forEach(node => { node.disabled = true; });
+
+      try {
+        return await action();
+      } finally {
+        controls.forEach((node, index) => { node.disabled = old[index]; });
+      }
+    }
+
+    function displayValue(value) {
+      if (value === null || value === undefined) return "—";
+      if (typeof value === "boolean") return value ? "نعم" : "لا";
+      if (typeof value === "object") return JSON.stringify(value);
+      return String(value);
+    }
+
+    function profileName(profile) {
+      return profile?.[state.nameColumn] || "المدير";
+    }
+
+    function setMenu(open) {
+      $("sidebar").classList.toggle("open", open);
+      $("menuOverlay").hidden = !open;
+      $("menuButton").setAttribute("aria-expanded", String(open));
+    }
+
+    function clearPrivateView() {
+      state.recordLoadId++;
+      state.user = null;
+      state.profile = null;
+      state.rows = [];
+      state.supervisors = [];
+      state.schemas = {};
+      state.editing = null;
+      state.supervisorEditing = null;
+
+      $("appView").hidden = true;
+      $("loginView").hidden = false;
+      $("loginPassword").value = "";
+
+      ["recordsTable", "supervisorsTable", "statsGrid", "editorFields"]
+        .forEach(id => $(id).replaceChildren());
+
+      ["editorDialog", "supervisorDialog"].forEach(id => {
+        if ($(id).open) $(id).close();
+      });
+
+      setMenu(false);
+    }
+
+    async function requireAdmin() {
+      const { data: { user }, error: userError } = await db.auth.getUser();
+      if (userError) throw userError;
+      if (!user) throw new Error("انتهت الجلسة. سجّل الدخول مجددًا.");
+
+      const { data: profile, error } = await db
+        .from("profiles")
+        .select("*")
+        .eq("id", user.id)
+        .single();
+
+      if (error) throw error;
+
+      const activeColumn = CONFIG.profileActiveColumn ||
+        ["is_active", "active"].find(key => Object.hasOwn(profile, key));
+
+      const nameColumn = CONFIG.profileNameColumn ||
+        ["full_name", "name"].find(key => Object.hasOwn(profile, key));
+
+      if (!activeColumn)
+        throw new Error("لم يوجد عمود active أو is_active في profiles. اضبط CONFIG.");
+
+      if (profile.role !== "admin" || profile[activeColumn] !== true) {
+        await db.auth.signOut({ scope: "local" });
+        clearPrivateView();
+        throw new Error("الدخول مسموح لحساب مدير مفعّل فقط.");
+      }
+
+      state.user = user;
+      state.profile = profile;
+      state.nameColumn = nameColumn;
+      state.activeColumn = activeColumn;
+
+      return profile;
+    }
+
+    /*
+     * قراءة وصف PostgREST لمعرفة أسماء الأعمدة وأنواعها الفعلية.
+     * لا توجد مفاتيح سرية ولا استعلامات SQL من المتصفح.
+     */
+    async function loadSchemas() {
+      state.schemas = {};
+      state.schemaError = "";
+
+      try {
+        const { data: { session }, error } = await db.auth.getSession();
+        if (error) throw error;
+        if (!session) throw new Error("لا توجد جلسة دخول.");
+
+        const response = await fetch(CONFIG.url + "/rest/v1/", {
+          headers: {
+            apikey: CONFIG.publishableKey,
+            Authorization: "Bearer " + session.access_token,
+            Accept: "application/openapi+json"
+          },
+          cache: "no-store"
+        });
+
+        if (!response.ok)
+          throw new Error("تعذر قراءة وصف الجداول: HTTP " + response.status);
+
+        const spec = await response.json();
+        state.schemas = spec.definitions || spec.components?.schemas || {};
+
+        if (!Object.keys(state.schemas).length)
+          throw new Error("لم يُرجع الخادم وصف أعمدة الجداول.");
+      } catch (error) {
+        state.schemaError = errorText(error);
+      }
+    }
+
+    function updateAccountLabels() {
+      $("sidebarName").textContent = profileName(state.profile);
+      $("accountEmail").textContent = state.user?.email || "";
+      $("welcomeTitle").textContent = "أهلًا، " + profileName(state.profile);
+      $("adminName").value = state.profile?.[state.nameColumn] || "";
+      $("adminEmail").value = state.user?.email || "";
+
+      $("nameForm").querySelector("button").disabled = !state.nameColumn;
+
+      $("todayLabel").textContent = new Intl.DateTimeFormat("ar-SA", {
+        dateStyle: "full",
+        timeZone: "Asia/Riyadh"
+      }).format(new Date());
+    }
+
+    async function startApp() {
+      await requireAdmin();
+      await loadSchemas();
+
+      $("loginView").hidden = true;
+      $("appView").hidden = false;
+      showMessage("loginError", "");
+
+      updateAccountLabels();
+
+      showMessage(
+        "globalNotice",
+        state.schemaError
+          ? "يمكن عرض السجلات، لكن نماذج الإضافة والتعديل متوقفة لأن وصف الأعمدة غير متاح. " +
+            state.schemaError
+          : ""
+      );
+
+      await navigate("dashboard");
+    }
+
+    async function navigate(page) {
+      if (!Object.hasOwn(TITLES, page)) return;
+
+      state.recordLoadId++;
+      state.page = page;
+      state.offset = 0;
+      $("recordSearch").value = "";
+
+      $("dashboardPage").hidden = page !== "dashboard";
+      $("recordsPage").hidden = !Object.hasOwn(TABLES, page);
+      $("supervisorsPage").hidden = page !== "supervisors";
+      $("settingsPage").hidden = page !== "settings";
+
+      $("topTitle").textContent = TITLES[page];
+
+      document.querySelectorAll("#navigation [data-page]").forEach(button => {
+        const active = button.dataset.page === page;
+        button.classList.toggle("active", active);
+        if (active) button.setAttribute("aria-current", "page");
+        else button.removeAttribute("aria-current");
+      });
+
+      setMenu(false);
+
+      try {
+        if (page === "dashboard") await loadStats();
+        else if (page === "supervisors") await loadSupervisors();
+        else if (page === "settings") updateAccountLabels();
+        else {
+          $("recordsTitle").textContent = TABLES[page].title;
+          await loadRecords();
+        }
+      } catch (error) {
+        toast(errorText(error), true);
+      }
+    }
+
+    async function loadStats() {
+      const grid = $("statsGrid");
+      grid.replaceChildren();
+
+      const jobs = Object.entries(TABLES).map(([table, info]) => ({
+        table,
+        title: info.title,
+        query: () => db.from(table).select("id", { count: "exact", head: true })
+      }));
+
+      jobs.push({
+        table: "profiles",
+        title: "المشرفون",
+        query: () => db.from("profiles")
+          .select("id", { count: "exact", head: true })
+          .eq("role", "supervisor")
+      });
+
+      const results = await Promise.all(jobs.map(async job => {
+        try {
+          const result = await job.query();
+          if (result.error) throw result.error;
+          return { ...job, count: result.count ?? 0 };
+        } catch (error) {
+          return { ...job, error };
+        }
+      }));
+
+      if (!state.user || state.page !== "dashboard") return;
+
+      for (const result of results) {
+        const card = el("div", null, "card stat");
+        card.append(
+          el("span", result.title),
+          el("strong", result.error
+            ? "—"
+            : result.count.toLocaleString("ar-SA")),
+          el("small", result.error
+            ? errorText(result.error)
+            : "إجمالي السجلات")
+        );
+        grid.append(card);
+      }
+    }
+
+    async function loadRecords() {
+      const table = state.page;
+      if (!Object.hasOwn(TABLES, table)) return;
+
+      const loadId = ++state.recordLoadId;
+      state.rows = [];
+      $("recordsTable").replaceChildren();
+      $("recordsStatus").textContent = "جارٍ تحميل السجلات…";
+      $("previousPage").disabled = true;
+      $("nextPage").disabled = true;
+      $("addRecordButton").disabled =
+        !state.schemas[table]?.properties;
+
+      try {
+        const { data, count, error } = await db
+          .from(table)
+          .select("*", { count: "exact" })
+          .order("id", { ascending: true })
+          .range(state.offset, state.offset + CONFIG.pageSize - 1);
+
+        if (loadId !== state.recordLoadId || !state.user) return;
+        if (error) throw error;
+
+        state.rows = data || [];
+        state.count = count ?? 0;
+
+        if (!state.rows.length && state.offset > 0) {
+          state.offset = Math.max(0, state.offset - CONFIG.pageSize);
+          return await loadRecords();
+        }
+
+        $("recordsStatus").textContent = "البحث يقتصر على سجلات الصفحة المعروضة.";
+        renderRecords();
+
+        const from = state.count ? state.offset + 1 : 0;
+        const to = state.offset + state.rows.length;
+
+        $("pageInfo").textContent =
+          `${from}–${to} من ${state.count} سجل`;
+
+        $("previousPage").disabled = state.offset === 0;
+        $("nextPage").disabled = to >= state.count;
+      } catch (error) {
+        if (loadId !== state.recordLoadId || !state.user) return;
+        $("recordsStatus").textContent = errorText(error);
+        $("pageInfo").textContent = "";
+        throw error;
+      }
+    }
+
+    function renderRecords() {
+      const host = $("recordsTable");
+      host.replaceChildren();
+
+      const search = $("recordSearch").value.trim().toLocaleLowerCase();
+      const rows = state.rows.filter(row =>
+        Object.values(row).some(value =>
+          displayValue(value).toLocaleLowerCase().includes(search)
+        )
+      );
+
+      if (!rows.length) {
+        host.append(el("div", search ? "لا توجد نتائج في هذه الصفحة." : "لا توجد سجلات.", "empty"));
+        return;
+      }
+
+      const columns = [...new Set(rows.flatMap(row => Object.keys(row)))];
+      const table = el("table");
+      const head = el("thead");
+      const heading = el("tr");
+
+      columns.forEach(key => heading.append(el("th", LABELS[key] || key)));
+      heading.append(el("th", "الإجراءات"));
+      head.append(heading);
+
+      const body = el("tbody");
+
+      rows.forEach(row => {
+        const tr = el("tr");
+
+        columns.forEach(key => {
+          const td = el("td", displayValue(row[key]), "data");
+          if (key === "id" || key.endsWith("_id")) td.dir = "auto";
+          tr.append(td);
+        });
+
+        const actions = el("td");
+        const box = el("div", null, "actions");
+        const edit = el("button", "تعديل", "secondary small");
+        const remove = el("button", "حذف", "danger small");
+
+        edit.type = remove.type = "button";
+        edit.disabled = !state.schemas[state.page]?.properties;
+        edit.addEventListener("click", () => openEditor(row));
+
+        remove.addEventListener("click", () => {
+          busy(remove, () => deleteRecord(row)).catch(error =>
+            toast(errorText(error), true)
+          );
+        });
+
+        box.append(edit, remove);
+        actions.append(box);
+        tr.append(actions);
+        body.append(tr);
+      });
+
+      table.append(head, body);
+      host.append(table);
+    }
+
+    function columnSchema(table, key) {
+      const property = state.schemas[table]?.properties?.[key] || {};
+      const ref = property.$ref;
+      if (!ref) return property;
+      const name = ref.split("/").pop();
+      return { ...state.schemas[name], ...property };
+    }
+
+    function isNullable(property) {
+      return property.nullable === true ||
+        (Array.isArray(property.type) && property.type.includes("null")) ||
+        property["x-nullable"] === true;
+    }
+
+    function dataType(property) {
+      if (Array.isArray(property.type))
+        return property.type.find(type => type !== "null") || "string";
+      return property.type || "string";
+    }
+
+    function isGenerated(key, property) {
+      return ["id", "created_at", "updated_at"].includes(key) ||
+        property.readOnly === true ||
+        /generated always|generated column/i.test(property.description || "");
+    }
+
+    function openEditor(row = null) {
+      const table = state.page;
+      const schema = state.schemas[table];
+
+      if (!schema?.properties) {
+        toast("وصف أعمدة الجدول غير متاح؛ لن يتم تخمين حقول الحفظ.", true);
+        return;
+      }
+
+      state.editing = {
+        table,
+        id: row?.id ?? null,
+        original: row,
+        controls: []
+      };
+
+      $("editorTitle").textContent =
+        (row ? "تعديل " : "إضافة ") + TABLES[table].singular;
+
+      $("editorFields").replaceChildren();
+      showMessage("editorError", "");
+
+      for (const key of Object.keys(schema.properties)) {
+        const property = columnSchema(table, key);
+        if (isGenerated(key, property)) continue;
+
+        const type = dataType(property);
+        const format = property.format || "";
+        const wrapper = el("div", null, "field");
+        const inputId = "field_" + state.editing.controls.length;
+        const label = el("label", LABELS[key] || key);
+        label.htmlFor = inputId;
+
+        let control;
+        let kind = "string";
+
+        if (type === "boolean") {
+          kind = "boolean";
+          control = el("select");
+          control.append(
+            new Option("— اختيار / قيمة افتراضية —", ""),
+            new Option("نعم", "true"),
+            new Option("لا", "false")
+          );
+        } else if (property.enum?.length) {
+          kind = "enum";
+          control = el("select");
+          control.append(new Option("— اختيار —", ""));
+          property.enum.filter(value => value !== null).forEach(value => {
+            control.append(new Option(String(value), String(value)));
+          });
+        } else if (
+          ["object", "array"].includes(type) ||
+          /json/i.test(format)
+        ) {
+          kind = "json";
+          control = el("textarea");
+          control.dir = "ltr";
+          control.placeholder = type === "array" ? "[]" : "{}";
+        } else if (
+          type === "integer" ||
+          type === "number" ||
+          /^(numeric|decimal|real|double)/i.test(format)
+        ) {
+          kind = "number";
+          control = el("input");
+          control.type = "number";
+          control.step = type === "integer" ? "1" : "any";
+        } else if (format === "date") {
+          control = el("input");
+          control.type = "date";
+        } else if (/time|timestamp/i.test(format)) {
+          /*
+           * إبقاء الوقت كنص يحفظ المنطقة الزمنية والدقة الأصلية.
+           */
+          control = el("input");
+          control.type = "text";
+          control.dir = "ltr";
+          control.placeholder = /timestamp/i.test(format)
+            ? "2026-10-24T08:00:00+03:00"
+            : "08:00:00";
+        } else if (
+          ["description", "content", "notes", "body"].includes(key)
+        ) {
+          control = el("textarea");
+        } else {
+          control = el("input");
+          control.type = key.includes("email") ? "email" : "text";
+          if (/uuid/i.test(format)) {
+            control.dir = "ltr";
+            control.placeholder = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx";
+            control.pattern =
+              "[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}";
+          }
+        }
+
+        control.id = inputId;
+        control.name = key;
+
+        const required = (schema.required || []).includes(key) &&
+          !isNullable(property);
+
+        control.required = required &&
+          (row !== null || !Object.hasOwn(property, "default"));
+
+        if (property.maxLength && "maxLength" in control)
+          control.maxLength = property.maxLength;
+
+        if (property.minimum !== undefined && kind === "number")
+          control.min = String(property.minimum);
+
+        if (property.maximum !== undefined && kind === "number")
+          control.max = String(property.maximum);
+
+        const value = row?.[key];
+
+        if (value !== undefined && value !== null) {
+          control.value = kind === "json"
+            ? JSON.stringify(value, null, 2)
+            : String(value);
+        }
+
+        wrapper.append(label, control);
+
+        const details = [key];
+
+        if (control.required) details.push("مطلوب");
+        if (Object.hasOwn(property, "default"))
+          details.push("له قيمة افتراضية");
+        if (/uuid/i.test(format))
+          details.push("أدخل معرّف السجل المرتبط عند وجود علاقة");
+
+        wrapper.append(el("div", details.join(" · "), "hint"));
+        $("editorFields").append(wrapper);
+
+        state.editing.controls.push({
+          key,
+          control,
+          kind,
+          property,
+          type
+        });
+      }
+
+      $("editorDialog").showModal();
+    }
+
+    function editorPayload(editor) {
+      const payload = {};
+
+      for (const field of editor.controls) {
+        const { key, control, kind, property, type } = field;
+        const raw = control.value;
+        const empty = raw.trim() === "";
+
+        if (empty) {
+          /*
+           * عند الإضافة: عدم إرسال الحقل يتيح DEFAULT في قاعدة البيانات.
+           * عند التعديل: الفراغ = null للحقول القابلة لذلك،
+           * أو نص فارغ للحقول النصية.
+           */
+          if (editor.id === null) continue;
+
+          if (isNullable(property)) {
+            payload[key] = null;
+          } else if (type === "string" &&
+                     !property.enum &&
+                     !/uuid|date|time/i.test(property.format || "")) {
+            payload[key] = "";
+          } else {
+            const old = editor.original?.[key];
+            if (old !== null && old !== undefined && old !== "")
+              throw new Error("الحقل «" + (LABELS[key] || key) + "» لا يقبل الفراغ.");
+          }
+
+          continue;
+        }
+
+        if (kind === "boolean") {
+          payload[key] = raw === "true";
+        } else if (kind === "number") {
+          const number = Number(raw);
+
+          if (!Number.isFinite(number))
+            throw new Error("قيمة رقمية غير صحيحة: " + (LABELS[key] || key));
+
+          if (type === "integer" && !Number.isSafeInteger(number))
+            throw new Error("أدخل عددًا صحيحًا ضمن النطاق الآمن: " + (LABELS[key] || key));
+
+          payload[key] = number;
+        } else if (kind === "json") {
+          try {
+            payload[key] = JSON.parse(raw);
+          } catch {
+            throw new Error("صيغة JSON غير صحيحة في " + (LABELS[key] || key));
+          }
+        } else {
+          payload[key] = raw;
+        }
+      }
+
+      return payload;
+    }
+
+    async function saveRecord(event) {
+      event.preventDefault();
+      const editor = state.editing;
+      if (!editor) return;
+
+      await busy($("editorForm"), async () => {
+        showMessage("editorError", "");
+
+        try {
+          await requireAdmin();
+          const payload = editorPayload(editor);
+
+          if (!Object.keys(payload).length)
+            throw new Error("أدخل بيانات السجل قبل الحفظ.");
+
+          let query;
+
+          if (editor.id === null) {
+            query = db.from(editor.table).insert(payload);
+          } else {
+            query = db.from(editor.table)
+              .update(payload)
+              .eq("id", editor.id);
+          }
+
+          const { data, error } = await query.select("id").single();
+          if (error) throw error;
+          if (!data) throw new Error("لم يؤكد الخادم حفظ السجل.");
+
+          $("editorDialog").close();
+          state.editing = null;
+          toast("تم حفظ السجل.");
+
+          if (state.page === editor.table) {
+            try {
+              await loadRecords();
+            } catch (reloadError) {
+              toast("تم الحفظ، لكن تحديث القائمة تعذر: " + errorText(reloadError), true);
+            }
+          }
+        } catch (error) {
+          showMessage("editorError", errorText(error), true);
+        }
+      });
+    }
+
+    async function deleteRecord(row) {
+      const table = state.page;
+      if (!Object.hasOwn(TABLES, table)) return;
+
+      if (!confirm(
+        "سيُرسل طلب حذف هذا السجل من قاعدة البيانات.\n" +
+        "قد تمنع العلاقات المرتبطة حذفه. هل تريد المتابعة؟"
+      )) return;
+
+      await requireAdmin();
+
+      const { data, error } = await db
+        .from(table)
+        .delete()
+        .eq("id", row.id)
+        .select("id");
+
+      if (error) throw error;
+
+      if (!data?.some(item => String(item.id) === String(row.id)))
+        throw new Error("لم يُحذف السجل؛ ربما تغيّر أو لا تسمح الصلاحيات بحذفه.");
+
+      toast("أكد الخادم حذف السجل.");
+
+      if (state.page === table) {
+        try {
+          await loadRecords();
+        } catch (reloadError) {
+          toast("تم الحذف، لكن تحديث القائمة تعذر: " + errorText(reloadError), true);
+        }
+      }
+    }
+
+    async function loadSupervisors() {
+      $("supervisorsStatus").textContent = "جارٍ تحميل المشرفين…";
+      $("supervisorsTable").replaceChildren();
+
+      /*
+       * تحميل جميع الصفحات حتى لا تختفي حسابات بسبب حد استجابة Supabase.
+       */
+      const rows = [];
+      let offset = 0;
+      const batchSize = 100;
+
+      while (true) {
+        const { data, error } = await db.from("profiles")
+          .select("*")
+          .eq("role", "supervisor")
+          .order("id", { ascending: true })
+          .range(offset, offset + batchSize - 1);
+
+        if (error) {
+          $("supervisorsStatus").textContent = errorText(error);
+          throw error;
+        }
+
+        if (!state.user || state.page !== "supervisors") return;
+        if (!data?.length) break;
+
+        rows.push(...data);
+        offset += data.length;
+      }
+
+      state.supervisors = rows;
+      $("supervisorsStatus").textContent = rows.length + " حساب مشرف";
+
+      if (!rows.length) {
+        $("supervisorsTable").append(el("div", "لم تتم إضافة مشرفين بعد.", "empty"));
+        return;
+      }
+
+      const table = el("table");
+      const head = el("thead");
+      const heading = el("tr");
+
+      ["الاسم", "البريد الإلكتروني", "الحالة", "معرّف الحساب", "الإجراء"]
+        .forEach(text => heading.append(el("th", text)));
+
+      head.append(heading);
+      const body = el("tbody");
+
+      rows.forEach(profile => {
+        const tr = el("tr");
+        tr.append(
+          el("td", profile[state.nameColumn] || "—", "data"),
+          el("td", profile.email || "غير متاح في profiles", "data")
+        );
+
+        const status = el("td");
+        const active = profile[state.activeColumn] === true;
+        status.append(el("span", active ? "مفعّل" : "معطّل",
+          "badge" + (active ? "" : " off")));
+
+        const idCell = el("td", profile.id, "data");
+        idCell.dir = "ltr";
+
+        const actionCell = el("td");
+        const edit = el("button", "تعديل الاسم والحالة", "secondary small");
+        edit.type = "button";
+
+        edit.addEventListener("click", () => {
+          state.supervisorEditing = profile;
+          $("editSupervisorName").value = profile[state.nameColumn] || "";
+          $("editSupervisorActive").value = String(active);
+          showMessage("supervisorEditError", "");
+          $("supervisorDialog").showModal();
+        });
+
+        actionCell.append(edit);
+        tr.append(status, idCell, actionCell);
+        body.append(tr);
+      });
+
+      table.append(head, body);
+      $("supervisorsTable").append(table);
+    }
+
+    async function functionError(error) {
+      let detail = "";
+
+      try {
+        if (error?.context instanceof Response) {
+          const text = await error.context.clone().text();
+
+          try {
+            const json = JSON.parse(text);
+            detail = typeof json.error === "string"
+              ? json.error
+              : json.message || "";
+          } catch {
+            detail = text.slice(0, 600);
+          }
+        }
+      } catch {
+        // إبقاء الخطأ الأصلي إن تعذر قراءة جسم الاستجابة.
+      }
+
+      return detail || errorText(error);
+    }
+
+    $("loginForm").addEventListener("submit", async event => {
+      event.preventDefault();
+
+      await busy($("loginForm"), async () => {
+        showMessage("loginError", "");
+
+        try {
+          const { error } = await db.auth.signInWithPassword({
+            email: $("loginEmail").value.trim(),
+            password: $("loginPassword").value
+          });
+
+          if (error) throw error;
+          await startApp();
+          $("loginPassword").value = "";
+        } catch (error) {
+          clearPrivateView();
+          showMessage("loginError", errorText(error), true);
+        }
+      });
+    });
+
+    $("logoutButton").addEventListener("click", async () => {
+      await busy($("logoutButton"), async () => {
+        const { error } = await db.auth.signOut({ scope: "local" });
+
+        if (error) {
+          toast(errorText(error), true);
+          return;
+        }
+
+        clearPrivateView();
+        showMessage("loginError", "");
+      });
+    });
+
+    $("refreshButton").addEventListener("click", async () => {
+      await busy($("refreshButton"), async () => {
+        try {
+          await requireAdmin();
+          await loadSchemas();
+          updateAccountLabels();
+
+          showMessage(
+            "globalNotice",
+            state.schemaError
+              ? "تعذر تحميل وصف الأعمدة؛ الإضافة والتعديل متوقفان. " + state.schemaError
+              : ""
+          );
+
+          if (Object.hasOwn(TABLES, state.page)) await loadRecords();
+          else if (state.page === "supervisors") await loadSupervisors();
+          else if (state.page === "dashboard") await loadStats();
+
+          toast("تم التحديث.");
+        } catch (error) {
+          toast(errorText(error), true);
+        }
+      });
+    });
+
+    [$("navigation"), $("quickActions")].forEach(container => {
+      container.addEventListener("click", event => {
+        const button = event.target.closest("[data-page]");
+        if (button) navigate(button.dataset.page);
+      });
+    });
+
+    $("menuButton").addEventListener("click", () =>
+      setMenu(!$("sidebar").classList.contains("open"))
+    );
+
+    $("menuOverlay").addEventListener("click", () => setMenu(false));
+
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape") setMenu(false);
+    });
+
+    $("recordSearch").addEventListener("input", renderRecords);
+
+    $("previousPage").addEventListener("click", async () => {
+      if (state.offset === 0) return;
+      state.offset = Math.max(0, state.offset - CONFIG.pageSize);
+      try { await loadRecords(); }
+      catch (error) { toast(errorText(error), true); }
+    });
+
+    $("nextPage").addEventListener("click", async () => {
+      if (state.offset + state.rows.length >= state.count) return;
+      state.offset += CONFIG.pageSize;
+      try { await loadRecords(); }
+      catch (error) { toast(errorText(error), true); }
+    });
+
+    $("addRecordButton").addEventListener("click", () => openEditor());
+    $("editorForm").addEventListener("submit", saveRecord);
+
+    [$("closeEditor"), $("cancelEditor")].forEach(button => {
+      button.addEventListener("click", () => $("editorDialog").close());
+    });
+
+    $("editorDialog").addEventListener("close", () => {
+      state.editing = null;
+      $("editorFields").replaceChildren();
+    });
+
+    $("closeSupervisor").addEventListener("click", () =>
+      $("supervisorDialog").close()
+    );
+
+    $("supervisorDialog").addEventListener("close", () => {
+      state.supervisorEditing = null;
+    });
+
+    $("createSupervisorForm").addEventListener("submit", async event => {
+      event.preventDefault();
+
+      await busy($("createSupervisorForm"), async () => {
+        $("createSupervisorStatus").textContent = "جارٍ إنشاء حساب المشرف…";
+
+        try {
+          await requireAdmin();
+
+          const fields = CONFIG.supervisorBodyFields;
+          const body = {
+            [fields.name]: $("supervisorName").value.trim(),
+            [fields.email]: $("supervisorEmail").value.trim(),
+            [fields.password]: $("supervisorPassword").value
+          };
+
+          if (!body[fields.name]) throw new Error("أدخل اسم المشرف.");
+
+          const { data, error } = await db.functions.invoke(
+            "admin-create-supervisor",
+            { body }
+          );
+
+          if (error) throw new Error(await functionError(error));
+          if (data?.error)
+            throw new Error(typeof data.error === "string"
+              ? data.error
+              : JSON.stringify(data.error));
+
+          if (data?.success === false)
+            throw new Error(data.message || "لم تؤكد الوظيفة نجاح الإنشاء.");
+
+          $("createSupervisorForm").reset();
+          $("createSupervisorStatus").textContent =
+            "أعادت وظيفة الإنشاء استجابة نجاح. تُحدّث القائمة للتحقق من ظهور الحساب.";
+
+          toast("استجابت وظيفة إنشاء المشرف بنجاح.");
+
+          if (state.page === "supervisors") {
+            try {
+              await loadSupervisors();
+            } catch (reloadError) {
+              toast("استجابت الوظيفة بنجاح، لكن تحديث القائمة تعذر: " +
+                errorText(reloadError), true);
+            }
+          }
+        } catch (error) {
+          $("createSupervisorStatus").textContent = errorText(error);
+          toast(errorText(error), true);
+        }
+      });
+    });
+
+    $("editSupervisorForm").addEventListener("submit", async event => {
+      event.preventDefault();
+      const profile = state.supervisorEditing;
+      if (!profile) return;
+
+      await busy($("editSupervisorForm"), async () => {
+        showMessage("supervisorEditError", "");
+
+        try {
+          await requireAdmin();
+
+          const name = $("editSupervisorName").value.trim();
+          const active = $("editSupervisorActive").value === "true";
+
+          if (!name) throw new Error("أدخل اسم المشرف.");
+
+          const { error } = await db.rpc("manage_supervisor", {
+            target_id: profile.id,
+            new_name: name,
+            new_active: active
+          });
+
+          if (error) throw error;
+
+          const { data: saved, error: verifyError } = await db
+            .from("profiles")
+            .select("*")
+            .eq("id", profile.id)
+            .single();
+
+          if (verifyError)
+            throw new Error("أُرسل التعديل، لكن تعذر التحقق من نتيجته: " +
+              errorText(verifyError));
+
+          if (
+            saved[state.nameColumn] !== name ||
+            saved[state.activeColumn] !== active
+          ) {
+            throw new Error("لم تظهر القيم المطلوبة بعد التعديل. راجع دالة manage_supervisor.");
+          }
+
+          $("supervisorDialog").close();
+          toast("تم تحديث المشرف والتحقق من التغيير.");
+
+          if (state.page === "supervisors") {
+            try { await loadSupervisors(); }
+            catch (reloadError) {
+              toast("تم التعديل، لكن تحديث القائمة تعذر: " +
+                errorText(reloadError), true);
+            }
+          }
+        } catch (error) {
+          showMessage("supervisorEditError", errorText(error), true);
+        }
+      });
+    });
+
+    $("nameForm").addEventListener("submit", async event => {
+      event.preventDefault();
+
+      await busy($("nameForm"), async () => {
+        try {
+          await requireAdmin();
+          if (!state.nameColumn)
+            throw new Error("لم يوجد عمود اسم في profiles.");
+
+          const name = $("adminName").value.trim();
+          if (!name) throw new Error("أدخل اسم المدير.");
+
+          const { data, error } = await db.from("profiles")
+            .update({ [state.nameColumn]: name })
+            .eq("id", state.user.id)
+            .select("*")
+            .single();
+
+          if (error) throw error;
+
+          state.profile = data;
+          updateAccountLabels();
+          toast("تم تحديث اسم المدير.");
+        } catch (error) {
+          toast(errorText(error), true);
+        }
+      });
+    });
+
+    $("emailForm").addEventListener("submit", async event => {
+      event.preventDefault();
+
+      await busy($("emailForm"), async () => {
+        try {
+          await requireAdmin();
+
+          const { data, error } = await db.auth.updateUser({
+            email: $("adminEmail").value.trim()
+          });
+
+          if (error) throw error;
+          if (data.user) state.user = data.user;
+
+          $("accountEmail").textContent = state.user.email || "";
+          toast("تم قبول طلب تحديث البريد. أكّد التغيير من رسائل البريد إن طُلب ذلك.");
+        } catch (error) {
+          toast(errorText(error), true);
+        }
+      });
+    });
+
+    $("passwordForm").addEventListener("submit", async event => {
+      event.preventDefault();
+
+      await busy($("passwordForm"), async () => {
+        try {
+          await requireAdmin();
+
+          const password = $("newPassword").value;
+          if (password !== $("confirmPassword").value)
+            throw new Error("كلمتا المرور غير متطابقتين.");
+
+          const attributes = { password };
+          const nonce = $("passwordNonce").value.trim();
+          if (nonce) attributes.nonce = nonce;
+
+          const { error } = await db.auth.updateUser(attributes);
+          if (error) throw error;
+
+          $("passwordForm").reset();
+          toast("تم تحديث كلمة المرور.");
+        } catch (error) {
+          toast(errorText(error), true);
+        }
+      });
+    });
+
+    $("reauthButton").addEventListener("click", async () => {
+      await busy($("reauthButton"), async () => {
+        try {
+          await requireAdmin();
+          const { error } = await db.auth.reauthenticate();
+          if (error) throw error;
+          toast("تم طلب رمز إعادة التحقق. راجع وسيلة الاتصال المسجلة بحسابك.");
+        } catch (error) {
+          toast(errorText(error), true);
+        }
+      });
+    });
+
+    /*
+     * عدم تنفيذ استدعاءات Supabase داخل callback المصادقة
+     * لتجنب تعارض قفل الجلسة.
+     */
+    db.auth.onAuthStateChange(event => {
+      if (event === "SIGNED_OUT") clearPrivateView();
+    });
+
+    async function initialize() {
+      $("loginSubmit").disabled = true;
+
+      try {
+        const { data: { session }, error } = await db.auth.getSession();
+        if (error) throw error;
+        if (session) await startApp();
+      } catch (error) {
+        clearPrivateView();
+        showMessage("loginError", errorText(error), true);
+      } finally {
+        $("loginSubmit").disabled = false;
+      }
+    }
+
+    initialize();
+  </script>
 </body>
 </html>
