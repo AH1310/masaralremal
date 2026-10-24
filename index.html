@@ -4,240 +4,429 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#102b46">
-<title>مسار الرمال | للتجارة والمقاولات العامة</title>
+<title>مسار الرمال | نظام المشرفين</title>
 <style>
-:root{
- --navy:#102b46;--blue:#1769aa;--gold:#d5a54c;
- --bg:#f3f6fa;--card:#fff;--text:#193047;
- --muted:#66788b;--line:#dfe7ef;
-}
+:root{--dark:#102b46;--blue:#1769aa;--gold:#d9aa52;--bg:#f2f5fa}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);
- font-family:Tahoma,Arial,sans-serif;line-height:1.8}
-button,input,textarea{font:inherit}
+body{margin:0;font-family:Tahoma,Arial,sans-serif;background:var(--bg);color:#23384c}
+button,input,select,textarea{font:inherit}
 button{cursor:pointer}
-header{position:sticky;top:0;z-index:20;background:var(--navy);
- color:white;display:flex;align-items:center;gap:15px;
- padding:12px 5%;box-shadow:0 4px 18px #0002}
-.logo{font-size:21px;font-weight:bold;flex:1}
-.logo small{display:block;font-size:11px;color:#e9c77d}
-.menu-btn{background:none;border:0;color:white;font-size:30px}
-.header-link{color:white;text-decoration:none;font-size:14px}
-nav{position:fixed;top:0;right:-310px;width:285px;
- height:100vh;background:#102b46;z-index:30;
- transition:.3s;padding:25px;box-shadow:0 0 30px #0003}
-nav.open{right:0}
-nav a{display:block;color:white;text-decoration:none;
- padding:13px;border-bottom:1px solid #ffffff20}
-nav a:hover{background:#ffffff12}
-.close{float:left;background:none;border:0;color:white;font-size:26px}
-.overlay{display:none;position:fixed;inset:0;background:#0008;z-index:25}
-.overlay.show{display:block}
-.hero{background:linear-gradient(130deg,#102b46,#1769aa);
- color:white;padding:75px 6%;text-align:center}
-.hero h1{font-size:clamp(27px,5vw,49px);margin:0 0 15px}
-.hero p{max-width:680px;margin:0 auto 25px;color:#e5eff9}
-.btn{border:0;border-radius:10px;padding:12px 22px;
- background:var(--gold);color:#172a3a;font-weight:bold;
- text-decoration:none;display:inline-block}
-.btn.secondary{background:white;color:var(--navy)}
-.container{max-width:1150px;margin:auto;padding:35px 18px}
-h2{text-align:center;color:var(--navy);margin-bottom:25px}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.card{background:var(--card);border:1px solid var(--line);
- border-radius:16px;padding:22px;box-shadow:0 5px 20px #18344a0b}
-.card h3{color:var(--blue);margin-top:5px}
-.card p{color:var(--muted)}
-.symbol{font-size:35px}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);
- gap:15px;text-align:center}
-.stat{background:white;padding:22px;border-radius:14px}
-.stat strong{display:block;color:var(--blue);font-size:25px}
-input,textarea{width:100%;padding:13px;margin:7px 0 14px;
- border:1px solid var(--line);border-radius:9px;background:white}
-textarea{min-height:110px}
-label{font-weight:bold}
-.contact{max-width:700px;margin:auto}
-footer{background:var(--navy);color:white;text-align:center;
- padding:25px;margin-top:30px}
-.notice{font-size:13px;color:var(--muted)}
-.status{margin:10px 0;font-size:14px}
-@media(max-width:700px){
- .grid{grid-template-columns:1fr}
- .stats{grid-template-columns:repeat(3,1fr)}
- .stat{padding:12px;font-size:12px}
- .logo{font-size:16px}
- .hero{padding:55px 20px}
-}
+header{background:var(--dark);color:#fff;display:flex;align-items:center;gap:12px;padding:12px 18px;position:sticky;top:0;z-index:5}
+header img{width:45px;height:45px;object-fit:contain}
+header strong{flex:1}
+.menuBtn{border:0;background:transparent;color:white;font-size:28px}
+aside{position:fixed;top:0;right:-290px;width:275px;height:100vh;background:var(--dark);z-index:20;transition:.25s;padding:20px;overflow:auto}
+aside.open{right:0}
+aside button{display:block;width:100%;background:none;color:white;text-align:right;border:0;padding:14px;border-bottom:1px solid #ffffff22}
+aside button:hover{background:#ffffff18}
+main{max-width:1200px;margin:auto;padding:20px}
+.card{background:white;border:1px solid #e0e6ee;border-radius:16px;padding:20px;margin:14px 0;box-shadow:0 4px 15px #00000008}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.stat{background:white;border-radius:14px;text-align:center;padding:20px}
+.stat b{display:block;font-size:28px;color:var(--blue)}
+input,select,textarea{width:100%;border:1px solid #cbd6e3;border-radius:9px;padding:11px;margin:6px 0 13px;background:white}
+textarea{min-height:95px}
+label{display:block;font-size:13px;font-weight:bold}
+.formGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:0 14px}
+.btn{border:0;border-radius:9px;background:var(--blue);color:white;padding:11px 17px;margin:3px}
+.btn.danger{background:#b73d3d}
+.btn.light{background:#e6edf4;color:#203d59}
+.item{padding:15px;border-bottom:1px solid #e4eaf0;overflow-wrap:anywhere}
+.item p{white-space:pre-wrap}
+.actions{display:flex;flex-wrap:wrap;gap:5px}
+.hidden{display:none!important}
+#login{max-width:420px;margin:9vh auto}
+#login h1{text-align:center}
+#login img{display:block;width:100px;height:100px;object-fit:contain;margin:auto}
+#notice{position:fixed;bottom:15px;left:15px;right:15px;max-width:550px;margin:auto;background:#102b46;color:white;padding:14px;border-radius:12px;display:none;z-index:50}
+@media(max-width:700px){.grid{grid-template-columns:repeat(2,1fr)}.formGrid{grid-template-columns:1fr}main{padding:10px}header strong{font-size:14px}}
 </style>
 </head>
 <body>
 
-<header>
-<button class="menu-btn" onclick="toggleMenu()" aria-label="القائمة">☰</button>
-<div class="logo">مسار الرمال
-<small>للتجارة والمقاولات العامة</small></div>
-<a class="header-link" href="admin.html">دخول الإدارة</a>
-</header>
-
-<div class="overlay" id="overlay" onclick="toggleMenu()"></div>
-<nav id="menu">
-<button class="close" onclick="toggleMenu()">×</button>
-<h2 style="color:white;text-align:right">القائمة الرئيسية</h2>
-<a href="#home" onclick="toggleMenu()">الرئيسية</a>
-<a href="#about" onclick="toggleMenu()">من نحن</a>
-<a href="#services" onclick="toggleMenu()">خدماتنا</a>
-<a href="#projects" onclick="toggleMenu()">المشروعات</a>
-<a href="#products" onclick="toggleMenu()">المنتجات والتوريدات</a>
-<a href="#contact" onclick="toggleMenu()">تواصل معنا</a>
-<a href="admin.html">لوحة الإدارة</a>
-</nav>
-
-<section class="hero" id="home">
-<h1>شركة مسار الرمال</h1>
-<p>للتجارة والمقاولات العامة — حلول متكاملة في التوريدات
-والتشغيل والصيانة والخدمات والمشروعات.</p>
-<a href="#services" class="btn">استكشف خدماتنا</a>
-<a href="#contact" class="btn secondary">تواصل معنا</a>
-</section>
-
-<section class="container" id="about">
-<h2>من نحن</h2>
+<div id="login">
+<img src="logo.png" alt="شعار مسار الرمال">
+<h1>نظام مسار الرمال</h1>
 <div class="card">
-<p>نسعى في شركة مسار الرمال للتجارة والمقاولات العامة
-إلى تقديم حلول موثوقة في مجالات التجارة والمقاولات
-والتوريدات والتشغيل والصيانة، مع الاهتمام بالجودة
-والالتزام باحتياجات العملاء.</p>
-</div>
-</section>
-
-<section class="container" id="services">
-<h2>خدمات الشركة</h2>
-<div class="grid">
-<div class="card"><div class="symbol">🏗️</div>
-<h3>المقاولات العامة</h3>
-<p>تنفيذ ومتابعة أعمال المقاولات والمشروعات.</p></div>
-<div class="card"><div class="symbol">🧹</div>
-<h3>التشغيل والنظافة</h3>
-<p>خدمات التشغيل والنظافة وإدارة المرافق.</p></div>
-<div class="card"><div class="symbol">🔧</div>
-<h3>الصيانة</h3>
-<p>خدمات الصيانة ومتابعة احتياجات المنشآت.</p></div>
-<div class="card"><div class="symbol">📦</div>
-<h3>التوريدات</h3>
-<p>توريد المواد والمستلزمات وفق متطلبات العملاء.</p></div>
-<div class="card"><div class="symbol">💡</div>
-<h3>المواد الكهربائية</h3>
-<p>توريدات الإنارة والكهرباء والمستلزمات.</p></div>
-<div class="card"><div class="symbol">📋</div>
-<h3>إدارة المشروعات</h3>
-<p>تنظيم أعمال المشروعات والتوريد والمتابعة.</p></div>
-</div>
-</section>
-
-<section class="container" id="projects">
-<h2>مشروعاتنا</h2>
-<div class="grid" id="projectsGrid">
-<div class="card">سيتم عرض المشروعات المنشورة هنا.</div>
-</div>
-</section>
-
-<section class="container" id="products">
-<h2>المنتجات والتوريدات</h2>
-<div class="grid" id="productsGrid">
-<div class="card">سيتم عرض المنتجات المنشورة هنا.</div>
-</div>
-</section>
-
-<section class="container" id="contact">
-<h2>تواصل معنا</h2>
-<div class="card contact">
-<form id="contactForm">
-<label>الاسم</label>
-<input id="name" required maxlength="150">
+<h3>تسجيل الدخول</h3>
+<form id="loginForm">
 <label>البريد الإلكتروني</label>
 <input id="email" type="email" required>
-<label>رسالتك</label>
-<textarea id="message" required maxlength="3000"></textarea>
-<button class="btn" type="submit">إرسال الرسالة</button>
-<div class="status" id="contactStatus"></div>
+<label>كلمة المرور</label>
+<input id="password" type="password" required>
+<button class="btn" type="submit">دخول</button>
+</form>
+</div>
+</div>
+
+<div id="app" class="hidden">
+<header>
+<button class="menuBtn" onclick="toggleMenu()">☰</button>
+<img src="logo.png" alt="الشعار">
+<strong>مسار الرمال | إدارة الأعمال</strong>
+<button class="btn light" onclick="logout()">خروج</button>
+</header>
+
+<aside id="side">
+<button onclick="toggleMenu()">✕ إغلاق</button>
+<button onclick="openPage('dashboard')">📊 لوحة التحكم</button>
+<button onclick="openPage('workers')">👷 العمال</button>
+<button onclick="openPage('attendance')">📅 الحضور والغياب</button>
+<button onclick="openPage('purchases')">🛒 المشتريات</button>
+<button onclick="openPage('tasks')">📋 المهام</button>
+<button onclick="openPage('reports')">📑 التقارير</button>
+<button onclick="openPage('account')">⚙️ حسابي</button>
+<button id="adminLink" class="hidden" onclick="location.href='admin.html'">👑 لوحة المدير</button>
+</aside>
+
+<main>
+<section id="dashboard" class="page">
+<h2 id="welcome">لوحة التحكم</h2>
+<div class="grid" id="stats"></div>
+</section>
+
+<section id="records" class="page hidden">
+<h2 id="pageTitle"></h2>
+<div class="card">
+<h3 id="formTitle">إضافة سجل</h3>
+<form id="recordForm">
+<div id="formFields" class="formGrid"></div>
+<button class="btn" type="submit">حفظ السجل</button>
+<button class="btn light" type="button" onclick="clearForm()">إلغاء</button>
+</form>
+</div>
+<div class="card">
+<h3>السجلات</h3>
+<input id="search" placeholder="بحث في السجلات...">
+<div id="recordsList"></div>
+</div>
+</section>
+
+<section id="account" class="page hidden">
+<h2>حسابي</h2>
+<div class="card">
+<form id="accountForm">
+<label>الاسم الكامل</label>
+<input id="myName" required minlength="2">
+<label>البريد الإلكتروني</label>
+<input id="myEmail" readonly>
+<button class="btn">حفظ الاسم</button>
+</form>
+<hr>
+<form id="passwordForm">
+<label>كلمة مرور جديدة (12 حرفًا على الأقل)</label>
+<input id="newPassword" type="password" minlength="12" required>
+<button class="btn">تغيير كلمة المرور</button>
 </form>
 </div>
 </section>
+</main>
+</div>
 
-<footer>
-شركة مسار الرمال للتجارة والمقاولات العامة
-<br>
-<small>جميع الحقوق محفوظة © <span id="year"></span></small>
-</footer>
+<div id="notice"></div>
 
 <script type="module">
-import {createClient} from
-'https://esm.sh/@supabase/supabase-js@2';
+import {createClient} from 'https://esm.sh/@supabase/supabase-js@2';
 
-const URL='https://uvlavmaumzluljiretvx.supabase.co';
-const KEY='sb_publishable_IQwLWe-keDBBLy3gaYiBjQ_unEHsUmg';
-const db=createClient(URL,KEY);
+const db=createClient(
+ 'https://uvlavmaumzluljiretvx.supabase.co',
+ 'sb_publishable_IQwLWe-keDBBLy3gaYiBjQ_unEHsUmg'
+);
+const $=id=>document.getElementById(id);
+let user=null,profile=null,table='workers',editId=null,rows=[];
+let workerOptions=[];
 
-document.getElementById('year').textContent=new Date().getFullYear();
-
-window.toggleMenu=()=>{
- document.getElementById('menu').classList.toggle('open');
- document.getElementById('overlay').classList.toggle('show');
+const config={
+ workers:{
+  title:'إدارة العمال',
+  fields:[
+   ['full_name','اسم العامل','text',true],
+   ['job_title','الوظيفة','text'],
+   ['phone','رقم الجوال','text'],
+   ['salary','الراتب','number'],
+   ['status','الحالة','select',false,['active','inactive','leave']],
+   ['notes','ملاحظات','textarea']
+  ]
+ },
+ attendance:{
+  title:'الحضور والغياب',
+  fields:[
+   ['worker_id','العامل','worker',true],
+   ['work_date','التاريخ','date',true],
+   ['status','الحالة','select',true,['present','absent','leave']],
+   ['overtime_hours','ساعات إضافية','number'],
+   ['notes','ملاحظات','textarea']
+  ]
+ },
+ purchases:{
+  title:'المشتريات',
+  fields:[
+   ['item_name','اسم الصنف','text',true],
+   ['quantity','الكمية','number',true],
+   ['unit','الوحدة','text'],
+   ['unit_price','سعر الوحدة','number'],
+   ['supplier','المورد','text'],
+   ['project_name','المشروع','text'],
+   ['purchase_date','تاريخ الشراء','date'],
+   ['notes','ملاحظات','textarea']
+  ]
+ },
+ tasks:{
+  title:'المهام',
+  fields:[
+   ['title','عنوان المهمة','text',true],
+   ['description','التفاصيل','textarea'],
+   ['due_date','تاريخ الاستحقاق','date'],
+   ['status','الحالة','select',true,['pending','progress','done']]
+  ]
+ },
+ reports:{
+  title:'التقارير',
+  fields:[
+   ['title','عنوان التقرير','text',true],
+   ['report_date','تاريخ التقرير','date'],
+   ['details','تفاصيل التقرير','textarea',true]
+  ]
+ }
 };
 
-function makeCard(title,description){
- const card=document.createElement('div');
- card.className='card';
- const h=document.createElement('h3');
- h.textContent=title;
- const p=document.createElement('p');
- p.textContent=description||'';
- card.append(h,p);
- return card;
+function notify(message){
+ $('notice').textContent=message;
+ $('notice').style.display='block';
+ setTimeout(()=>$('notice').style.display='none',4500);
 }
+function today(){return new Date().toLocaleDateString('en-CA')}
+window.toggleMenu=()=>$('side').classList.toggle('open');
 
-async function loadPublic(table,element){
- const target=document.getElementById(element);
- const {data,error}=await db.from(table)
- .select('title,description')
- .eq('published',true).order('created_at',{ascending:false})
- .limit(30);
- if(error){
-  target.textContent='تعذر تحميل البيانات حاليًا.';
+async function start(){
+ const result=await db.auth.getUser();
+ if(!result.data.user){showLogin();return}
+ user=result.data.user;
+ const {data,error}=await db.from('profiles')
+  .select('full_name,role,active').eq('id',user.id).single();
+ if(error||!data?.active||!['admin','supervisor'].includes(data.role)){
+  await db.auth.signOut();
+  showLogin();
+  notify('الحساب غير مفعل أو غير مصرح له');
   return;
  }
- target.replaceChildren();
- if(!data?.length){
-  target.textContent='لا توجد عناصر منشورة حاليًا.';
-  return;
- }
- data.forEach(item=>target.appendChild(
-  makeCard(item.title,item.description)
- ));
+ profile=data;
+ $('login').classList.add('hidden');
+ $('app').classList.remove('hidden');
+ $('adminLink').classList.toggle('hidden',profile.role!=='admin');
+ await openPage('dashboard');
+}
+function showLogin(){
+ $('login').classList.remove('hidden');
+ $('app').classList.add('hidden');
 }
 
-loadPublic('company_projects','projectsGrid');
-loadPublic('company_products','productsGrid');
-
-document.getElementById('contactForm').onsubmit=async e=>{
+$('loginForm').onsubmit=async e=>{
  e.preventDefault();
- const status=document.getElementById('contactStatus');
  const button=e.target.querySelector('button');
  button.disabled=true;
- status.textContent='جارٍ الإرسال...';
- const {error}=await db.from('contact_messages').insert({
-  name:document.getElementById('name').value.trim(),
-  email:document.getElementById('email').value.trim(),
-  message:document.getElementById('message').value.trim()
+ const {error}=await db.auth.signInWithPassword({
+  email:$('email').value.trim(),
+  password:$('password').value
  });
- status.textContent=error
-  ?'تعذر إرسال الرسالة. حاول لاحقًا.'
-  :'تم إرسال رسالتك بنجاح.';
- if(!error)e.target.reset();
  button.disabled=false;
+ if(error){notify(error.message);return}
+ await start();
 };
+
+window.logout=async()=>{await db.auth.signOut();location.reload()};
+
+window.openPage=async name=>{
+ $('side').classList.remove('open');
+ document.querySelectorAll('.page').forEach(x=>x.classList.add('hidden'));
+ if(name==='dashboard'){
+  $('dashboard').classList.remove('hidden');
+  $('welcome').textContent='مرحبًا، '+profile.full_name;
+  await dashboard();
+ }else if(name==='account'){
+  $('account').classList.remove('hidden');
+  $('myName').value=profile.full_name;
+  $('myEmail').value=user.email;
+ }else{
+  table=name;
+  $('records').classList.remove('hidden');
+  $('pageTitle').textContent=config[table].title;
+  $('search').value='';
+  if(table==='attendance')await loadWorkers();
+  buildForm();
+  await loadRecords();
+ }
+};
+
+async function dashboard(){
+ $('stats').replaceChildren();
+ for(const t of ['workers','attendance','purchases','tasks','reports']){
+  const {count,error}=await db.from(t)
+   .select('id',{head:true,count:'exact'});
+  const box=document.createElement('div');
+  box.className='stat';
+  const label=document.createElement('span');
+  label.textContent=config[t].title;
+  const value=document.createElement('b');
+  value.textContent=error?'—':count;
+  box.append(label,value);
+  $('stats').append(box);
+ }
+}
+
+async function loadWorkers(){
+ const {data,error}=await db.from('workers')
+  .select('id,full_name').order('full_name').limit(1000);
+ workerOptions=error?[]:(data||[]);
+}
+
+function buildForm(){
+ editId=null;
+ $('formTitle').textContent='إضافة سجل';
+ $('formFields').replaceChildren();
+ for(const [key,label,type,required,options] of config[table].fields){
+  const wrapper=document.createElement('div');
+  const l=document.createElement('label');
+  l.textContent=label;
+  let field;
+  if(type==='textarea')field=document.createElement('textarea');
+  else if(type==='select'||type==='worker'){
+   field=document.createElement('select');
+   const values=type==='worker'
+    ?workerOptions.map(w=>[w.id,w.full_name])
+    :options.map(x=>[x,x]);
+   const empty=document.createElement('option');
+   empty.value='';
+   empty.textContent='اختر';
+   field.append(empty);
+   values.forEach(([value,text])=>{
+    const opt=document.createElement('option');
+    opt.value=value;opt.textContent=text;
+    field.append(opt);
+   });
+  }else{
+   field=document.createElement('input');
+   field.type=type;
+   if(type==='number'){field.min='0';field.step='0.01'}
+   if(type==='date')field.value=today();
+  }
+  field.id='f_'+key;
+  field.required=!!required;
+  wrapper.append(l,field);
+  $('formFields').append(wrapper);
+ }
+}
+window.clearForm=()=>buildForm();
+
+async function loadRecords(){
+ const list=$('recordsList');
+ list.textContent='جارٍ التحميل...';
+ const {data,error}=await db.from(table).select('*')
+  .order('created_at',{ascending:false}).limit(300);
+ if(error){list.textContent=error.message;return}
+ rows=data||[];
+ renderRecords();
+}
+
+function renderRecords(){
+ const list=$('recordsList');
+ list.replaceChildren();
+ const q=$('search').value.trim().toLowerCase();
+ const filtered=rows.filter(r=>JSON.stringify(r).toLowerCase().includes(q));
+ if(!filtered.length){list.textContent='لا توجد سجلات مطابقة.';return}
+ for(const record of filtered){
+  const item=document.createElement('div');
+  item.className='item';
+  for(const [key,label] of config[table].fields){
+   const p=document.createElement('p');
+   let value=record[key]??'';
+   if(key==='worker_id'){
+    value=workerOptions.find(w=>w.id===value)?.full_name||value;
+   }
+   p.textContent=label+': '+value;
+   item.append(p);
+  }
+  if(table==='purchases'){
+   const total=document.createElement('strong');
+   total.textContent='الإجمالي: '+
+    (Number(record.quantity)*Number(record.unit_price)).toFixed(2)+' ر.س';
+   item.append(total);
+  }
+  const actions=document.createElement('div');
+  actions.className='actions';
+  const edit=document.createElement('button');
+  edit.className='btn light';edit.textContent='تعديل';
+  edit.onclick=()=>editRecord(record);
+  const del=document.createElement('button');
+  del.className='btn danger';del.textContent='حذف';
+  del.onclick=()=>deleteRecord(record.id);
+  actions.append(edit,del);
+  item.append(actions);
+  list.append(item);
+ }
+}
+$('search').oninput=renderRecords;
+
+function editRecord(record){
+ editId=record.id;
+ $('formTitle').textContent='تعديل السجل';
+ for(const [key] of config[table].fields){
+  $('f_'+key).value=record[key]??'';
+ }
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+
+$('recordForm').onsubmit=async e=>{
+ e.preventDefault();
+ const payload={};
+ for(const [key,label,type] of config[table].fields){
+  const value=$('f_'+key).value.trim();
+  payload[key]=type==='number'?(value===''?0:Number(value))
+   :(value===''?null:value);
+ }
+ const button=e.target.querySelector('button[type=submit]');
+ button.disabled=true;
+ if(!editId)payload.created_by=user.id;
+ const result=editId
+  ?await db.from(table).update(payload).eq('id',editId)
+  :await db.from(table).insert(payload);
+ button.disabled=false;
+ if(result.error){notify(result.error.message);return}
+ notify('تم حفظ السجل');
+ buildForm();
+ await loadRecords();
+};
+
+async function deleteRecord(id){
+ if(!confirm('تأكيد حذف السجل؟'))return;
+ const {error}=await db.from(table).delete().eq('id',id);
+ if(error){notify(error.message);return}
+ notify('تم الحذف');
+ await loadRecords();
+}
+
+$('accountForm').onsubmit=async e=>{
+ e.preventDefault();
+ const name=$('myName').value.trim();
+ if(name.length<2){notify('الاسم قصير');return}
+ const {error}=await db.from('profiles')
+  .update({full_name:name}).eq('id',user.id);
+ if(error){notify(error.message);return}
+ profile.full_name=name;
+ notify('تم تعديل الاسم');
+};
+
+$('passwordForm').onsubmit=async e=>{
+ e.preventDefault();
+ const {error}=await db.auth.updateUser({
+  password:$('newPassword').value
+ });
+ if(error){notify(error.message);return}
+ $('passwordForm').reset();
+ notify('تم تغيير كلمة المرور');
+};
+
+start();
 </script>
 </body>
 </html>
