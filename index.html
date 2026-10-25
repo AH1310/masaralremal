@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>شركة مسار الرمال - النظام الداخلي المتكامل</title>
     <!-- Tailwind CSS & Icons -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cloudflare.com">
     <script>
         tailwind.config = {
@@ -110,7 +110,9 @@
                     <button onclick="switchTab('sup-workers')" class="nav-btn w-full text-right flex items-center gap-2.5 px-3 py-2.5 rounded-lg font-medium text-sm transition hover:bg-slate-100"><i class="fa-solid fa-users w-5 text-center"></i> العمال والموظفين</button>
                     <button onclick="switchTab('sup-attendance')" class="nav-btn w-full text-right flex items-center gap-2.5 px-3 py-2.5 rounded-lg font-medium text-sm transition hover:bg-slate-100"><i class="fa-solid fa-calendar-check w-5 text-center"></i> سجلات الحضور والانصراف</button>
                     <button onclick="switchTab('sup-purchases')" class="nav-btn w-full text-right flex items-center gap-2.5 px-3 py-2.5 rounded-lg font-medium text-sm transition hover:bg-slate-100"><i class="fa-solid fa-receipt w-5 text-center"></i> إدارة عهد المشتريات</button>
-                    <button onclick="switchTab('sup-tasks')" class="nav-btn w-full text-right flex items-center gap-2.5 px-3 py-2.5 rounded-lg font-medium text-sm transition hover:bg-slate-100"><i class="fa-solid fa-list-check w-5 text-center"></i> المهام والتكليفات</button>
+
+
+                                        <button onclick="switchTab('sup-tasks')" class="nav-btn w-full text-right flex items-center gap-2.5 px-3 py-2.5 rounded-lg font-medium text-sm transition hover:bg-slate-100"><i class="fa-solid fa-list-check w-5 text-center"></i> المهام والتكليفات</button>
                     <button onclick="switchTab('sup-reports')" class="nav-btn w-full text-right flex items-center gap-2.5 px-3 py-2.5 rounded-lg font-medium text-sm transition hover:bg-slate-100"><i class="fa-solid fa-file-lines w-5 text-center"></i> التقارير الدورية</button>
                 </div>
                 <div class="pt-4 border-t border-slate-100">
@@ -129,16 +131,265 @@
                     <h2 class="text-xl font-bold text-darkgreen-800">إحصائيات الشركة ونظرة عامة حية</h2>
                     <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
                         <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex items-center gap-4">
+                            <div class="p-3 bg-blue-50 text-blue-700 rounded-lg text-xl"><i class="fa-solid fa-user-tie"></i></div>
+                            <div><p class="text-xs text-slate-500 font-medium">المشرفين</p><h3 id="stat-supervisors" class="text-xl font-bold text-slate-800">-</h3></div>
+                        </div>
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex items-center gap-4">
+                            <div class="p-3 bg-emerald-50 text-emerald-700 rounded-lg text-xl"><i class="fa-solid fa-users"></i></div>
+                            <div><p class="text-xs text-slate-500 font-medium">إجمالي العمال</p><h3 id="stat-workers" class="text-xl font-bold text-slate-800">-</h3></div>
+                        </div>
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex items-center gap-4">
+                            <div class="p-3 bg-amber-50 text-amber-700 rounded-lg text-xl"><i class="fa-solid fa-wallet"></i></div>
+                            <div><p class="text-xs text-slate-500 font-medium">مصاريف المشتريات</p><h3 id="stat-purchases" class="text-xl font-bold text-slate-800">-</h3></div>
+                        </div>
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex items-center gap-4">
+                            <div class="p-3 bg-indigo-50 text-indigo-700 rounded-lg text-xl"><i class="fa-solid fa-list-check"></i></div>
+                            <div><p class="text-xs text-slate-500 font-medium">المهام القائمة</p><h3 id="stat-tasks" class="text-xl font-bold text-slate-800">-</h3></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="tab-admin-supervisors" class="tab-content space-y-6 hidden-view">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                        <h2 class="text-xl font-bold text-darkgreen-800">إدارة المشرفين والوصول</h2>
+                        <button onclick="openSupervisorModal()" class="bg-darkgreen-800 text-white px-4 py-2 rounded-lg font-medium text-sm hover:bg-darkgreen-900 transition flex items-center gap-1.5">
+                            <i class="fa-solid fa-user-plus"></i> إنشاء حساب مشرف جديد
+                        </button>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 flex gap-3">
+                        <input type="text" id="search-supervisor" oninput="renderSupervisorsTable()" class="flex-1 px-4 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-darkgreen-800 outline-none" placeholder="ابحث باسم المشرف أو معرّفه...">
+                    </div>
+                    <div class="bg-white rounded-xl border border-slate-200 overflow-x-auto shadow-sm">
+                        <table class="w-full text-right text-sm">
+                            <thead class="bg-slate-50 border-b border-slate-200 text-slate-600 font-semibold">
+                                <tr>
+                                    <th class="p-4">الاسم الكامل</th>
+                                    <th class="p-4">الدور الوظيفي</th>
+                                    <th class="p-4">حالة التفعيل</th>
+                                    <th class="p-4 text-center">العمليات</th>
+                                </tr>
+                            </thead>
+                            <tbody id="table-supervisors-body" class="divide-y divide-slate-100"></tbody>
+                        </table>
+                        <div id="supervisors-empty-state" class="p-8 text-center text-slate-400 hidden-view">لا يوجد مشرفين يطابقون خيارات البحث الحالية.</div>
+                    </div>
+                </div>
+
+                <div id="tab-admin-monitor" class="tab-content space-y-6 hidden-view">
+                    <h2 class="text-xl font-bold text-darkgreen-800">مراقبة السجلات التشغيلية للقراءة فقط</h2>
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 grid grid-cols-1 md:grid-cols-3 gap-3">
+                        <select id="monitor-filter-table" onchange="fetchMonitorData()" class="px-3 py-2 border border-slate-300 rounded-lg text-sm outline-none">
+                            <option value="workers">سجلات العمال الميدانيين</option>
+                            <option value="attendance">سجلات الحضور والانصراف اليومية</option>
+                            <option value="purchases">فواتير ومشتريات العهدة</option>
+                            <option value="tasks">حالة التكليفات والمهام</option>
+                            <option value="reports">التقارير الإدارية المكتوبة</option>
+                        </select>
+                        <select id="monitor-filter-supervisor" onchange="fetchMonitorData()" class="px-3 py-2 border border-slate-300 rounded-lg text-sm outline-none">
+                            <option value="">تصفية حسب كل المشرفين</option>
+                        </select>
+                        <input type="text" id="monitor-search-input" oninput="filterMonitorLocalData()" class="px-3 py-2 border border-slate-300 rounded-lg text-sm outline-none" placeholder="البحث الشامل في الصفحة الحالية...">
+                    </div>
+                    <div class="bg-white rounded-xl border border-slate-200 overflow-x-auto shadow-sm">
+                        <table class="w-full text-right text-sm">
+                            <thead id="monitor-table-head" class="bg-slate-50 border-b border-slate-200 text-slate-600 font-semibold"></thead>
+                            <tbody id="monitor-table-body" class="divide-y divide-slate-100"></tbody>
+                        </table>
+                        <div id="monitor-empty-state" class="p-8 text-center text-slate-400 hidden-view">لا توجد بيانات مطابقة ضمن المعيار الإداري الحالي.</div>
+                    </div>
+                </div>
+
+                <div id="tab-sup-workers" class="tab-content space-y-6 hidden-view">
+                    <div class="flex justify-between items-center">
+                        <h2 class="text-xl font-bold text-darkgreen-800">إدارة العمال والموظفين</h2>
+                        <button onclick="openWorkerForm()" class="bg-darkgreen-800 text-white px-4 py-2 rounded-lg font-medium text-sm hover:bg-darkgreen-900 transition"><i class="fa-solid fa-plus"></i> إضافة عامل</button>
+                    </div>
+                    <div id="workers-list-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+                </div>
+
+                <div id="tab-sup-attendance" class="tab-content space-y-6 hidden-view">
+                    <div class="flex justify-between items-center">
+                        <h2 class="text-xl font-bold text-darkgreen-800">سجلات الحضور والانصراف</h2>
+                        <button onclick="openAttendanceForm()" class="bg-darkgreen-800 text-white px-4 py-2 rounded-lg font-medium text-sm hover:bg-darkgreen-900 transition"><i class="fa-solid fa-check-double"></i> تسجيل حضور جديد</button>
+                    </div>
+                    <div class="bg-white rounded-xl border border-slate-200 overflow-x-auto shadow-sm">
+                        <table class="w-full text-right text-sm">
+                            <thead class="bg-slate-50 border-b border-slate-200 text-slate-600 font-semibold">
+                                <tr><th class="p-4">العامل</th><th class="p-4">التاريخ</th><th class="p-4">الحالة</th><th class="p-4">ملاحظات</th><th class="p-4 text-center">الإجراءات</th></tr>
+                            </thead>
+                            <tbody id="attendance-table-body" class="divide-y divide-slate-100"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="tab-sup-purchases" class="tab-content space-y-6 hidden-view">
+                    <div class="flex justify-between items-center">
+                        <h2 class="text-xl font-bold text-darkgreen-800">إدارة عهد المشتريات والكميات الفورية</h2>
+
+
+                <div id="tab-sup-tasks" class="tab-content space-y-6 hidden-view">
+                    <div class="flex justify-between items-center">
+                        <h2 class="text-xl font-bold text-darkgreen-800">التكليفات والمهام التنفيذية</h2>
+                        <button onclick="openTaskForm()" class="bg-darkgreen-800 text-white px-4 py-2 rounded-lg font-medium text-sm hover:bg-darkgreen-900 transition"><i class="fa-solid fa-plus"></i> إنشاء مهمة عمل</button>
+                    </div>
+                    <div id="tasks-list-container" class="space-y-3"></div>
+                </div>
+
+                <div id="tab-sup-reports" class="tab-content space-y-6 hidden-view">
+                    <div class="flex justify-between items-center">
+                        <h2 class="text-xl font-bold text-darkgreen-800">التقارير الدورية المرفوعة</h2>
+                        <button onclick="openReportForm()" class="bg-darkgreen-800 text-white px-4 py-2 rounded-lg font-medium text-sm hover:bg-darkgreen-900 transition"><i class="fa-solid fa-pen-nib"></i> كتابة تقرير جديد</button>
+                    </div>
+                    <div id="reports-list-container" class="space-y-4"></div>
+                </div>
+
+                <div id="tab-global-settings" class="tab-content space-y-6 hidden-view">
+                    <h2 class="text-xl font-bold text-darkgreen-800">إعدادات الحساب والتوثيق الآمن</h2>
+                    <div class="bg-white p-6 rounded-xl border border-slate-200 max-w-2xl space-y-6">
+                        <form id="form-update-profile" onsubmit="handleUpdateProfile(event)" class="space-y-4">
+                            <h3 class="text-md font-bold text-slate-700 border-b pb-2"><i class="fa-solid fa-id-card"></i> البيانات الشخصية</h3>
+                            <div>
+                                <label class="block text-sm font-medium mb-1">الاسم الكامل داخل النظام</label>
+                                <input type="text" id="settings-name" required class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm outline-none focus:ring-2 focus:ring-darkgreen-800">
+                            </div>
+                            <button type="submit" class="bg-darkgreen-800 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-darkgreen-900 transition">حفظ الاسم الكامل</button>
+                        </form>
+                        <form id="form-update-password" onsubmit="handleUpdatePassword(event)" class="space-y-4 pt-4 border-t border-slate-100">
+                            <h3 class="text-md font-bold text-slate-700 border-b pb-2"><i class="fa-solid fa-key"></i> تعديل كلمة المرور آمنياً</h3>
+                            <div>
+                                <label class="block text-sm font-medium mb-1">كلمة المرور الجديدة</label>
+                                <input type="password" id="settings-password" required minlength="12" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm outline-none focus:ring-2 focus:ring-darkgreen-800" placeholder="لا تقل عن 12 خانة معقدة">
+                            </div>
+                            <button type="submit" class="bg-darkgreen-800 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-darkgreen-900 transition">تحديث كلمة السر</button>
+                        </form>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+    <div id="modal-supervisor" class="fixed inset-0 bg-slate-900/50 backdrop-blur-xs z-50 flex items-center justify-center hidden-view p-4">
+        <div class="bg-white w-full max-w-md rounded-xl shadow-xl overflow-hidden border border-slate-200">
+            <div class="bg-darkgreen-800 text-white p-4 flex justify-between items-center">
+                <h3 class="font-bold text-sm"><i class="fa-solid fa-user-plus"></i> إنشاء مشرف جديد بنظام الحساب الحصري</h3>
+                <button onclick="closeSupervisorModal()" class="text-white/80 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <form id="form-create-supervisor" onsubmit="handleCreateSupervisor(event)" class="p-4 space-y-4">
+                <div>
+                    <label class="block text-sm font-medium mb-1">الاسم الكامل للمشرف</label>
+                    <input type="text" id="sup-full-name" required class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm outline-none">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-1">البريد الإلكتروني الرسمي</label>
+                    <input type="email" id="sup-email" required class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm outline-none">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-1">كلمة المرور الابتدائية</label>
+                    <input type="password" id="sup-password" required minlength="12" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm outline-none" placeholder="12 خانة على الأقل">
+                </div>
+                <div class="flex justify-end gap-2 pt-2">
+                    <button type="button" onclick="closeSupervisorModal()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-medium rounded-lg transition">إلغاء</button>
+                    <button type="submit" id="btn-submit-supervisor" class="px-4 py-2 bg-darkgreen-800 text-white text-sm font-medium rounded-lg hover:bg-darkgreen-900 transition">إنشاء الحساب</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="modal-crud" class="fixed inset-0 bg-slate-900/50 backdrop-blur-xs z-50 flex items-center justify-center hidden-view p-4">
+        <div class="bg-white w-full max-w-md rounded-xl shadow-xl overflow-hidden border border-slate-200">
+            <div class="bg-darkgreen-800 text-white p-4 flex justify-between items-center">
+                <h3 id="modal-crud-title" class="font-bold text-sm">عملية تشغيلية</h3>
+                <button onclick="closeCrudModal()" class="text-white/80 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <form id="form-crud" onsubmit="handleCrudSubmit(event)" class="p-4 space-y-4">
+                <div id="crud-form-fields" class="space-y-4"></div>
+                <div class="flex justify-end gap-2 pt-2">
+                    <button type="button" onclick="closeCrudModal()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-medium rounded-lg transition">إلغاء</button>
+                    <button type="submit" id="btn-crud-submit" class="px-4 py-2 bg-darkgreen-800 text-white text-sm font-medium rounded-lg hover:bg-darkgreen-900 transition">حفظ التغييرات</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const SUPABASE_URL = "https://supabase.co";
+        const SUPABASE_ANON_KEY = "sb_publishable_IQwLWe-keDBBLy3gaYiBjQ_unEHsUmg";
+        
+        let supabase;
+        try {
+            supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        } catch(e) {
+            supabase = supabasejs.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        }
+        
+        let currentUserSession = null;
+        let currentUserProfile = null;
+        let localSupervisorsCache = [];
+        let localMonitorCache = [];
+        
+        let activeCrudType = ''; 
+        let activeCrudId = null; 
+        let currentUploadedBase64 = '';
+
+        window.addEventListener('DOMContentLoaded', async () => {
+            const { data: { session } } = await supabase.auth.getSession();
+            if (session) {
+                await processUserSession(session);
+            } else {
+                showView('login');
+            }
+
+            supabase.auth.onAuthStateChange(async (event, session) => {
+                if (event === 'SIGNED_IN' && session) {
+                    await processUserSession(session);
+                } else if (event === 'SIGNED_OUT') {
+                    currentUserSession = null;
+                    currentUserProfile = null;
+                    showView('login');
+                }
+            });
+        });
+
+        async function processUserSession(session) {
+            showGlobalLoader(true, "جاري التحقق من الصلاحيات وحالة تفعيل الحساب...");
+            try {
+                currentUserSession = session;
+                const { data: profile, error } = await supabase
+                    .from('profiles')
+                    .select('id, full_name, role, active')
+                    .eq('id', session.user.id)
+                    .single();
+
+                if (error || !profile) {
+                    throw new Error("لم يتم العثور على سجل الصلاحيات الخاص بك في قاعدة بيانات المشروعات.");
+                }
+
+                if (profile.active !== true) {
+                    await supabase.auth.signOut();
+                    throw new Error("هذا الحساب معطل حالياً من قبل الإدارة العليا للشركة.");
+                }
+
+                currentUserProfile = profile;
+                setupInterfaceDashboard();
+            } catch (err) {
+                showToast(err.message, "error");
+                showView('login');
+            } finally {
+                showGlobalLoader(false);
+            }
+        }
+
+        function setupInterfaceDashboard() {
+            document.getElementById('user-display-name').textContent = currentUserProfile.full_name;
+            document.getElementById('user-display-role').textContent = currentUserProfile.role === 'admin' ? 'المدير العام' : 'مشرف ميداني';
+            
+            if (currentUserProfile.role === 'admin') {
+                document.getElementById('nav-group-admin').classList.remove('hidden-view');
+                document.getElementById('nav-group-supervisor').classList.add('hidden-view');
+                switchTab('admin-overview');
+            } else {
 
 
 
-
-
-
-
-
-
-
-
-
-                         
+                        
